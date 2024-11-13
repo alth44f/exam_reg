@@ -22,8 +22,13 @@
                             Account
                         </button>
                         <ul class="dropdown-menu">
+                            {{#if login}}
+                            <li><a class="dropdown-item" href="">Profile</a></li>
+                            <li><a class="dropdown-item" href="">Logout</a></li>
+                            {{else}}
                             <li><a class="dropdown-item" href="/login">Login</a></li>
                             <li><a class="dropdown-item" href="/signup">Signup</a></li>
+                            {{/if}}
                         </ul>
                     </div>
                 </li>
