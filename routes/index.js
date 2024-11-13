@@ -1,4 +1,5 @@
 var express = require('express');
+let studentHelper = require('../helper/studentHelper')
 var router = express.Router();
 
 /* GET home page. */
@@ -16,8 +17,9 @@ router.get('/signup', function(req, res) {
   res.render('signup');
 });
 router.post('/signup', function(req, res) {
-  console.log(req.body);
-  
+  studentHelper.doSignup(req.body).then(()=>{
+    res.render('userDashboard')
+  })
 });
 
 module.exports = router;
