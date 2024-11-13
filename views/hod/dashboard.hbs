@@ -1,0 +1,37 @@
+<section>
+    <div class="container">
+        <h2 class="text-center fw-bold text-warning pt-5 mt-3">Welcome <span>{{hod.name}}!</span></h2>
+        <div class="col-lg-4">
+            <canvas id="myChart" class="p-3"></canvas>
+            <span id="reg" class="d-none">{{data.reg}}</span>
+            <span id="nonreg" class="d-none">{{data.nonreg}}</span>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart');
+    const reg = document.getElementById("reg").innerText;
+    const nonreg = document.getElementById("nonreg").innerText;
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [
+                'Registered',
+                'Non Registered',
+            ],
+            datasets: [{
+                label: '',
+                data: [reg,nonreg],
+                backgroundColor: [
+                    '#5fcf80',
+                    '#dc3545',
+                ],
+                hoverOffset: 4
+            }]
+        }
+    });
+</script>
