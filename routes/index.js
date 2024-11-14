@@ -10,15 +10,15 @@ router.get('/login', function(req, res) {
   res.render('login', { title: 'Users' });
 });
 router.post('/login',(req,res)=>{
-  console.log(req.body.password)
-  res.render('userDashboard',{user: req.body.email,login: true})
+  studentHelper.doLogin(req.body)
+  // res.render('userDashboard',{user: req.body.email,login: true})
 })
 router.get('/signup', function(req, res) {
   res.render('signup');
 });
 router.post('/signup', function(req, res) {
   studentHelper.doSignup(req.body).then(()=>{
-    res.render('userDashboard')
+    res.redirect('/login')
   })
 });
 
