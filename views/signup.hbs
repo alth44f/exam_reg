@@ -10,12 +10,12 @@
                 {{#if result}}
                 <p class="text-danger">Email Already Exist.</p>
                 {{/if}}
-                <form autocomplete="off" action="/signup" method="post">
+                <form autocomplete="off" action="/signup" onsubmit="return Validation()" method="post">
 
                     <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="name">Name</label>
-                        <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Enter your name"
-                            required />
+                        <input type="text" id="name" name="name" class="form-control form-control-lg"
+                            placeholder="Enter your name" required />
                     </div>
 
                     <div data-mdb-input-init class="form-outline mb-4">
@@ -42,6 +42,8 @@
                     <!-- Email input -->
                     <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="phone">Phone</label>
+                        <p id="p-msg" class="text-center text-danger d-none">Please enter a valid 10-digit phone number.
+                        </p>
                         <input type="number" name="phone" id="phone" class="form-control form-control-lg"
                             placeholder="Enter phone number" required />
                     </div>
@@ -49,6 +51,8 @@
                     <!-- Email input -->
                     <div data-mdb-input-init class="form-outline mb-4">
                         <label class="form-label" for="aadhar">Aadhar</label>
+                        <p id="a-msg" class="text-center text-danger d-none">Please enter a valid 12-digit aadhar
+                            number. </p>
                         <input type="number" name="aadhar" id="aadhar" class="form-control form-control-lg"
                             placeholder="Enter aadhar number" required />
                     </div>
@@ -59,9 +63,11 @@
                         <br>
                         <input type="radio" id="male" name="gender" value="male" class="form-check-input" required />
                         <label for="male">Male</label>
-                        <input type="radio" id="female" name="gender" value="female" class="form-check-input" required />
+                        <input type="radio" id="female" name="gender" value="female" class="form-check-input"
+                            required />
                         <label for="female">Female</label>
-                        <input type="radio" id="others" name="gender" value="others" class="form-check-input" required />
+                        <input type="radio" id="others" name="gender" value="others" class="form-check-input"
+                            required />
                         <label for="others">Others</label>
                     </div>
 
@@ -98,3 +104,30 @@
     </div>
 
 </section>
+
+<script>
+
+    function Validation() {
+        let aadhar = document.getElementById('aadhar').value;
+        let phone = document.getElementById('phone').value;
+        let phone_msg = document.getElementById('p-msg');
+        let aadhar_msg = document.getElementById('a-msg');
+        if (phone.length === 10) {
+            phone_msg.classList.add('d-none')
+        } else {
+            phone_msg.classList.remove('d-none')
+        }
+
+        if (aadhar.length === 12) {
+            aadhar_msg.classList.add('d-none')
+        } else {
+            aadhar_msg.classList.remove('d-none')
+        }
+
+        if (aadhar.length === 12 && phone.length === 10) {
+            return true
+        } else {
+            return false
+        }
+    }
+</script>
