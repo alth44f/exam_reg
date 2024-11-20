@@ -2,14 +2,6 @@ var express = require('express');
 var router = express.Router();
 const hodHelper = require('../helper/hodHelper');
 
-const verifyLogin = (req, res, next) => {
-  if (req.session.loggedIn) {
-    next()
-  } else {
-    res.redirect('/hod/login')
-  }
-}
-
 router.get('/', (req, res) => {
   let data = {
     reg: 122,
