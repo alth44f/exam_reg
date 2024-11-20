@@ -10,7 +10,7 @@
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "^4.21.1",
-    "express-hbs": "^2.5.0",
+    "express-handlebars": "^8.0.1",
     "express-session": "^1.18.1",
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",

@@ -28,5 +28,8 @@ router.post('/signup', function (req, res) {
     res.redirect('/login')
   })
 });
+router.get('/register-exam',(req,res)=>{
+  res.render('registerExam.hbs')
+})
 
 module.exports = router;
