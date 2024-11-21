@@ -15,14 +15,14 @@ router.get('/', verifyLogin, (req, res) => {
     reg: 122,
     nonreg: 56
   }
-  res.render('hod/dashboard', { hod: { name: 'Admin' }, data, err: req.session.hodLoginErr })
+  res.render('hod/dashboard', { hod: { name: 'Admin' }, data })
 });
 router.get('/login', (req, res) => {
-  res.render('hod/login')
+  res.render('hod/login',{err: req.session.hodLoginErr})
 })
 router.post('/login', (req, res) => {
   hodHelper.doLogin(req.body).then((resp) => {
-    console.log(resp)
+    // console.log(resp)
     if (resp.err) {
       req.session.hodLoginErr = resp.err
       res.redirect('/hod/login')

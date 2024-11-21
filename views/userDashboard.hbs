@@ -1,9 +1,8 @@
 <section class="bg">
     <div class="container">
-        <h2 class="text-center text-light fs-2 fw-bold">Welcome <span>{{user}}</span>!</h2>
-        <div class="row text-center">
+        <h2 class="text-center text-light fs-2 fw-bold">Welcome <span>{{student.name}}</span>!</h2>
+        <div class="row text-center d-flex">
             <div class="col-lg-12">
-                
                 <a href="/register-exam" class="btn " style="background-color: lightblue;">Register Exam</a>
                 <a class="btn " style="background-color: lightblue;">Registration Status</a>
             </div>
@@ -30,7 +29,7 @@
     }
 
     .bg {
-        background: url('assets/img/bg.avif') no-repeat center;
+        background: url('/img/bg.avif') no-repeat center;
         background-size: cover;
         height: 80vh;
     }

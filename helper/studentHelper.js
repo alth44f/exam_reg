@@ -23,7 +23,7 @@ module.exports = {
                     if (loginData.password === data[0].password) {
                         // console.log("success");
                         if (data[0].type === "student") {
-                            resolve({ err: false, user: data })
+                            resolve({ err: false, data })
                         } else {
                             resolve({ err: 'Email not exist.' })
                         }
