@@ -18,7 +18,7 @@ router.get('/', verifyLogin, (req, res) => {
   res.render('hod/dashboard', { hod: { name: 'Admin' }, data })
 });
 router.get('/login', (req, res) => {
-  res.render('hod/login',{err: req.session.hodLoginErr})
+  res.render('hod/login', { err: req.session.hodLoginErr })
 })
 router.post('/login', (req, res) => {
   hodHelper.doLogin(req.body).then((resp) => {
@@ -32,5 +32,8 @@ router.post('/login', (req, res) => {
       res.redirect('/hod')
     }
   })
+})
+router.get('/approve-students',verifyLogin, (req, res) => {
+  res.render('hod/approveStudents', { hod: { name: 'Hod' } })
 })
 module.exports = router;

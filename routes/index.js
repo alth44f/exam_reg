@@ -50,6 +50,5 @@ router.get('/student', verifyLogin, (req, res) => {
 })
 router.post('/register-exam', (req, res) => {
   console.log(req.body);
-
 })
 module.exports = router;
