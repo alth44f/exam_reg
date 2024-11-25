@@ -1,45 +1,48 @@
 <div class="container">
     <form action="#" method="post">
         <div class="row">
-            <div class="col-lg-12 p-3">
-                <h2>Basic details</h2>
-            </div>
-            <div class="col-lg-6 p-2">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" placeholder="Enter Your Name" class="form-control">
-            </div>
-            <div class="col-lg-6 p-2">
-                <label for="aadhar">Aadhar number</label>
-                <input type="text" name="aadhar" id="aadhar" placeholder="Enter Aadhar Number" class="form-control">
-            </div>
-            <div class="col-lg-6 p-2">
-                <label for="reg_no">Register number</label>
-                <input type="text" name="reg_no" id="reg_no" placeholder="Enter Register Number" class="form-control">
-            </div>
-            <div class="col-lg-6 p-2">
-                <label for="second_lang">Second Language</label>
-                <input type="text" name="second_lang" id="second_lang" placeholder="Enter Second Language"
-                    class="form-control">
-            </div>
-            <div class="col-lg-12 p-3">
-                <h2>Fill paper</h2>
-            </div>
-            <div class="paper">
-                <div class="row">
-                    <div class="col-lg-6 p-2">
-                        <label for="papercode">Paper code</label>
-                        <input type="text" name="papercode" id="papercode" class="form-control">
-                    </div>
-                    <div class="col-lg-6 p-2">
-                        <label for="papername">Paper name</label>
-                        <input type="text" name="papername" id="papername" class="form-control">
+            <form action="/student" method="post">
+                <div class="col-lg-12 p-3">
+                    <h2>Basic details</h2>
+                </div>
+                <div class="col-lg-6 p-2">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Enter Your Name" class="form-control">
+                </div>
+                <div class="col-lg-6 p-2">
+                    <label for="aadhar">Aadhar number</label>
+                    <input type="number" name="aadhar" id="aadhar" placeholder="Enter Aadhar Number" class="form-control">
+                </div>
+                <div class="col-lg-6 p-2">
+                    <label for="reg_no">Register number</label>
+                    <input type="text" name="reg_no" id="reg_no" placeholder="Enter Register Number"
+                        class="form-control">
+                </div>
+                <div class="col-lg-6 p-2">
+                    <label for="second_lang">Second Language</label>
+                    <input type="text" name="second_lang" id="second_lang" placeholder="Enter Second Language"
+                        class="form-control">
+                </div>
+                <div class="col-lg-12 p-3">
+                    <h2>Fill paper</h2>
+                </div>
+                <div class="paper">
+                    <div class="row">
+                        <div class="col-lg-6 p-2">
+                            <label for="papercode">Paper code</label>
+                            <input type="text" name="papercode1" id="papercode" class="form-control">
+                        </div>
+                        <div class="col-lg-6 p-2">
+                            <label for="papername">Paper name</label>
+                            <input type="text" name="papername1" id="papername" class="form-control">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12 p-2 text-center">
-                <button id="add-paper-btn" type="button" class="btn btn-primary">Add Paper</button>
-                <a href="#" class="btn btn-success">Submit</a>
-            </div>
+                <div class="col-lg-12 p-2 text-center">
+                    <button id="add-paper-btn" type="button" class="btn btn-primary">Add Paper</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
         </div>
     </form>
 </div>
@@ -48,8 +51,14 @@
     const addPaperBtn = document.getElementById('add-paper-btn');
     const paperContainer = document.querySelector('.paper'); // Select .paper div
 
+    // Initialize a counter to keep track of the number of times the fields are added
+    let paperCodeCount = 1;
+
     // Function to add a new row inside the paper container
     function addPaperFields() {
+        // Increment the counter
+        paperCodeCount++;
+
         // Create a new div for the row
         const paperRow = document.createElement('div');
         paperRow.classList.add('row');
@@ -57,12 +66,12 @@
         // Add the paper code and paper name input fields to the new row
         paperRow.innerHTML = `
             <div class="col-lg-6 p-2">
-                <label for="papercode">Paper code</label>
-                <input type="text" name="papercode" class="form-control">
+                <label for="papercode-${paperCodeCount}">Paper code</label>
+                <input type="text" name="papercode${paperCodeCount}" id="papercode-${paperCodeCount}" class="form-control papercode-${paperCodeCount}">
             </div>
             <div class="col-lg-6 p-2">
-                <label for="papername">Paper name</label>
-                <input type="text" name="papername" class="form-control">
+                <label for="papername-${paperCodeCount}">Paper name</label>
+                <input type="text" name="papername${paperCodeCount}" id="papername-${paperCodeCount}" class="form-control">
             </div>
         `;
 
