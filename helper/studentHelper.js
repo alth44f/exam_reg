@@ -15,7 +15,7 @@ module.exports = {
     doLogin: (loginData) => {
         return new Promise((resolve, reject) => {
             db.query('select * from login_data where email = ?', loginData.email, (err, data) => {
-                // console.log(data);
+                console.log(data);
                 if (data.length == 0) {
                     resolve({ err: 'Email not exist.' })
                     // console.log("email not exist");
