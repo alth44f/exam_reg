@@ -33,7 +33,17 @@ router.post('/login', (req, res) => {
     }
   })
 })
-router.get('/approve-students',verifyLogin, (req, res) => {
-  res.render('hod/approveStudents', { hod: { name: 'Hod' } })
+router.get('/approve-students', verifyLogin, (req, res) => {
+  hodHelper.getAllStudents().then((resp) => {
+    // console.log(resp);
+    res.render('hod/approveStudents', { hod: { name: 'Hod' }, students: resp, status: req.session.changeStatus })
+  })
+})
+router.get('/change-status/:email/:status', (req, res) => {
+  console.log(req.params);
+  req.session.changeStatus = req.params.status ? 'Approved' : 'Rejected.'
+  hodHelper.changeStatus(req.params).then(() => {
+    res.redirect('/hod/approve-students')
+  })
 })
 module.exports = router;

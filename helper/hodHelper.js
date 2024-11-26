@@ -24,5 +24,19 @@ module.exports = {
                 }
             })
         })
+    },
+    getAllStudents: () => {
+        return new Promise((resolve, reject) => {
+            db.query('select * from login_data where type="student"', (err, data) => {
+                resolve(data)
+            })
+        })
+    },
+    changeStatus: (data) => {
+        return new Promise((resolve, reject) => {
+            db.query('update login_data set status=? where email = ?',[data.status,data.email],(err,data)=>{
+                resolve()
+            })
+        })
     }
 }
