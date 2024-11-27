@@ -11,10 +11,10 @@
             <ul>
                 <li><a href="/" class="active">Home<br></a></li>
 
-                <li><a href="courses.html">Courses</a></li>
+                <li><a href="#">Courses</a></li>
 
 
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">Contact</a></li>
                 <li>
                     <div class="dropdown">
                         <button class="btn btn-getstarted dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -23,8 +23,8 @@
                         </button>
                         <ul class="dropdown-menu">
                             {{#if login}}
-                            <li><a class="dropdown-item" href="">Profile</a></li>
-                            <li><a class="dropdown-item" href="">Logout</a></li>
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             {{else}}
                             <li><a class="dropdown-item" href="/login">Login</a></li>
                             <li><a class="dropdown-item" href="/signup">Signup</a></li>

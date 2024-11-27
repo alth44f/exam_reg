@@ -51,4 +51,12 @@ router.get('/student', verifyLogin, (req, res) => {
 router.post('/register-exam', (req, res) => {
   console.log(req.body);
 })
+router.get('/logout', (req, res) => {
+  req.session.loggedIn = null
+  req.session.student = null
+  res.redirect('/login')
+})
+router.get('/student-register', verifyLogin, (req, res) => {
+  res.render('studentDetails', { student: true, login: true })
+})
 module.exports = router;
