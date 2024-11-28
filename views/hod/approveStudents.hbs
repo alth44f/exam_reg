@@ -5,7 +5,7 @@
 <section>
     <div class="container mt-5">
         {{!-- <p class="text-center text-warning mt-3 mb-3">{{status}}</p> --}}
-        <table id="myTable" class="table table-hover text-center mt-5">
+        <table id="myTable" class="table table-hover  mt-5">
             <thead>
                 <tr>
                     <th scope="col">Student Name</th>
@@ -20,15 +20,15 @@
             <tbody>
                 {{#each students}}
                 <tr>
-                    <th>{{name}}</th>
-                    <th scope="col">{{course}}</th>
-                    <th scope="col">{{email}}</th>
-                    <th scope="col">{{phone}}</th>
-                    <th scope="col">{{aadhar}}</th>
+                    <td>{{name}}</td>
+                    <td scope="col">{{course}}</td>
+                    <td scope="col">{{email}}</td>
+                    <td scope="col">{{phone}}</td>
+                    <td scope="col">{{aadhar}}</td>
                     {{#if status}}
-                    <th scope="col">Active</th>
+                    <td scope="col">Active</td>
                     {{else}}
-                    <th scope="col">Inactive</th>
+                    <td scope="col">Inactive</td>
                     {{/if}}
                     <td>
                         <a href="/hod/change-status/{{email}}/1" class="btn btn-success">Approve</a>

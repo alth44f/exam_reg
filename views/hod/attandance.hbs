@@ -1,0 +1,37 @@
+<section>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12 mt-3">
+                <label for="course" class="form-label">Courses</label>
+                <select class="form-select" name="course" id="course" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BSC">BSC</option>
+                    <option value="BCOM">BCOM</option>
+                    <option value="BBA">BBA</option>
+                    <option value="BT">BT</option>
+                    <option value="HOMSC">HOMSC</option>
+                    <option value="BA ECO">BA ECO</option>
+                </select>
+            </div>
+            <div class="col-lg-12 mt-3">
+                <label for="course" class="form-label">Student</label>
+                <select class="form-select" name="course" id="course" required>
+                    <option selected disabled value="">Choose...</option>
+                    {{#each students}}
+                    <option value="BCA">{{name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-lg-12 mt-3">
+                <label for="attandance" class="form-label">Attandace</label>
+                <input type="number" name="attandance" id="attandance" class="form-control">
+            </div>
+            <div class="col-lg-12 ">
+                <div class="text-center">
+                    <button class="btn btn-success mt-3">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
