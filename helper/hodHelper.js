@@ -39,9 +39,9 @@ module.exports = {
             })
         })
     },
-    addAttandance: (email) => {
+    addAttandance: (data) => {
         return new Promise((resolve, reject) => {
-            db.query('update login_data set attandance=? where email =?', [email], (err, data) => {
+            db.query('update login_data set attandance=? where email =?', [data.attandance,data.email], (err, data) => {
                 resolve()
             })
         })

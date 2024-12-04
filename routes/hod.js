@@ -46,7 +46,14 @@ router.get('/change-status/:email/:status', verifyLogin, (req, res) => {
 })
 router.get('/add-attandance/:email', verifyLogin, async (req, res) => {
   // hodHelper.addAttandance(req.params.email)
-  res.render('hod/attandance', { hod: { name: 'Hod' } })
+  res.render('hod/attandance', { hod: { name: 'Hod' }, email: req.params.email })
+})
+
+router.post('/add-attandance/', verifyLogin, async (req, res) => {
+  hodHelper.addAttandance(req.body).then(()=>{
+    res.redirect('/hod/approve-students')
+  })
+  console.log(req.body)
 })
 
 module.exports = router;
