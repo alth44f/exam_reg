@@ -59,4 +59,12 @@ router.get('/logout', (req, res) => {
 router.get('/student-register', verifyLogin, (req, res) => {
   res.render('studentDetails', { student: true, login: true })
 })
+router.post('/student-register', verifyLogin, (req, res) => {
+  console.log(req.files);
+  console.log(req.body);
+  
+  // studentHelper.SetStudentRegister(req.body).then(()=>{
+
+  // })
+})
 module.exports = router;

@@ -6,6 +6,7 @@ var logger = require('morgan');
 var hbs = require('express-handlebars')
 let db = require('./connection/connection')
 var session = require('express-session');
+var fileupload = require('express-fileupload')
 
 //database connection
 db.connect((err) => {
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret:"exam_reg",cookie:{maxAge:600000}}))
 app.use('/', indexRouter);
 app.use('/hod', hodRouter);
+app.use(fileupload())
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
