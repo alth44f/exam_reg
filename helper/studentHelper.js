@@ -41,9 +41,23 @@ module.exports = {
 
         })
     },
-    SetStudentRegister: (data) => {
+    SetStudentRegister: (email, sslc, plustwo) => {
         return new Promise((resolve, reject) => {
-            
+            db.query('insert into students values(?,?,?)', [email, sslc, plustwo], (err, data) => {
+                console.log(err, data)
+                resolve()
+            })
+        })
+    },
+    checkUpload: (email) => {
+        return new Promise((resolve, reject) => {
+            db.query('select * from students where email=?', email, (err, data) => {
+                if (data.length == 0) {
+                    resolve({status: false})
+                } else {
+                    resolve({status: true})
+                }
+            })
         })
     }
 }

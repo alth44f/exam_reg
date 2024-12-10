@@ -28,13 +28,14 @@ app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: pat
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret:"exam_reg",cookie:{maxAge:600000}}))
+app.use(fileupload())
+
 app.use('/', indexRouter);
 app.use('/hod', hodRouter);
-app.use(fileupload())
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

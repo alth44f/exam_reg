@@ -15,7 +15,7 @@ router.get('/', verifyLogin, (req, res) => {
     reg: 122,
     nonreg: 56
   }
-  res.render('hod/dashboard', { hod: { name: 'Admin' }, data })
+  res.render('hod/dashboard', {title:'Hod Admin Dashboard', hod: { name: 'Admin' }, data })
 });
 router.get('/login', (req, res) => {
   res.render('hod/login', { err: req.session.hodLoginErr })
@@ -36,7 +36,7 @@ router.post('/login', (req, res) => {
 router.get('/approve-students', verifyLogin, (req, res) => {
   hodHelper.getAllStudents().then((resp) => {
     // console.log(resp);
-    res.render('hod/approveStudents', { hod: { name: 'Hod' }, students: resp })
+    res.render('hod/approveStudents', {title: "Student Details", hod: { name: 'Hod' }, students: resp })
   })
 })
 router.get('/change-status/:email/:status', verifyLogin, (req, res) => {
@@ -46,7 +46,7 @@ router.get('/change-status/:email/:status', verifyLogin, (req, res) => {
 })
 router.get('/add-attandance/:email', verifyLogin, async (req, res) => {
   // hodHelper.addAttandance(req.params.email)
-  res.render('hod/attandance', { hod: { name: 'Hod' }, email: req.params.email })
+  res.render('hod/attandance', {title: "Add Attandance", hod: { name: 'Hod' }, email: req.params.email })
 })
 
 router.post('/add-attandance/', verifyLogin, async (req, res) => {
