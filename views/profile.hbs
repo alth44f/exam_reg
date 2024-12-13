@@ -3,10 +3,10 @@
         <div class="col-md-4">
             <!-- Profile Picture -->
             <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top" alt="Profile Picture">
+                <img src="img/{{student.gender}}.png" class="card-img-top" alt="Profile Picture">
                 <div class="card-body text-center">
-                    <h5 class="card-title">MOHAMMED ALTHAF M A</h5>
-                    <p class="text-muted">Web Developer</p>
+                    <h5 class="card-title">{{student.name}}</h5>
+                    {{!-- <p class="text-muted">{{log student}}</p> --}}
                 </div>
             </div>
         </div>
@@ -20,19 +20,29 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <strong>Email:</strong>
-                        <p>althafpnlm@gmail.com</p>
+                        <p>{{student.email}}</p>
                     </div>
                     <div class="mb-3">
-                        <strong>Location:</strong>
-                        <p> Kasaragod, Kerala, India</p>
+                        <strong>course:</strong>
+                        <p>{{student.course}}</p>
                     </div>
                     <div class="mb-3">
-                        <strong>Bio:</strong>
-                        <p>I am good at web desining.I want to change the world into AI.
-                            I want a AI girlfriend for assistance.</p>
+                        <strong>phone:</strong>
+                        <p>{{student.phone}}</p>
                     </div>
+                    <div class="mb-3">
+                        <strong>aadhar:</strong>
+                        <p>{{student.aadhar}}</p>
+                    </div>
+                     <div class="mb-3">
+                        <strong>gender:</strong>
+                        <p>{{student.gender}}</p>
+                    </div>
+                     <div class="mb-3">
+                        <strong>dob:</strong>
+                        <p>{{student.dob}}</p>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </div>
-</div>

@@ -45,14 +45,15 @@ router.post('/signup', function (req, res) {
     res.redirect('/login')
   })
 });
-router.get('/register-exam', verifyLogin, (req, res) => {
-  res.render('registerExam', { student: true })
+router.get('/register-exam', verifyLogin,async (req, res) => {
+  let student=await studentHelper.getStudentDetails()
+  res.render('registerExam', { student: true,title:"Register exam" })
 })
 router.get('/student', verifyLogin, (req, res) => {
   // console.log(req.session)
-  // studentHelper.checkUpload(req.session.student[0].email).then((resp) => {
-    res.render('userDashboard',  {title:"Student Dashboard",student: req.session.student[0], login: true })
-  // })
+  studentHelper.checkUpload(req.session.student[0].email).then((resp) => {
+    res.render('userDashboard',  {title:"Student Dashboard",student: req.session.student[0], login: true,status: resp.status })
+  })
 })
 router.post('/register-exam', (req, res) => {
   console.log(req.body);
@@ -94,7 +95,7 @@ router.post('/student-register', verifyLogin, (req, res) => {
 })
 
 router.get('/profile', verifyLogin, (req, res) => {
-  res.render('profile',{student: true,title:"Profile"})
+  res.render('profile',{student:req.session.student[0],title:"Profile",login:true})
 })
 
 module.exports = router;

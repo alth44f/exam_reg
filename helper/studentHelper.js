@@ -53,10 +53,20 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.query('select * from students where email=?', email, (err, data) => {
                 if (data.length == 0) {
-                    resolve({status: false})
+                    resolve({ status: false })
                 } else {
-                    resolve({status: true})
+                    resolve({ status: true })
                 }
+            })
+        })
+    },
+    getStudentDetails: () => {
+        return new Promise((resolve, reject) => {
+            const sql = `SELECT login_data.aadhar, students.register_number
+                         FROM login
+                         INNER JOIN students ON login.email_id = students.email_id;`;
+            db.query('select * from students ', (err, data) => {
+
             })
         })
     }
