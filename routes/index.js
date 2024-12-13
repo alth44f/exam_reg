@@ -45,14 +45,14 @@ router.post('/signup', function (req, res) {
     res.redirect('/login')
   })
 });
-router.get('/register-exam', verifyLogin,async (req, res) => {
-  let student=await studentHelper.getStudentDetails()
-  res.render('registerExam', { student: true,title:"Register exam" })
+router.get('/register-exam', verifyLogin, async (req, res) => {
+  let student = await studentHelper.getStudentDetails(req.session.student[0].email)
+  res.render('registerExam', { student, title: "Register exam", login: true })
 })
 router.get('/student', verifyLogin, (req, res) => {
   // console.log(req.session)
   studentHelper.checkUpload(req.session.student[0].email).then((resp) => {
-    res.render('userDashboard',  {title:"Student Dashboard",student: req.session.student[0], login: true,status: resp.status })
+    res.render('userDashboard', { title: "Student Dashboard", student: req.session.student[0], login: true, status: resp.status })
   })
 })
 router.post('/register-exam', (req, res) => {
@@ -64,7 +64,7 @@ router.get('/logout', (req, res) => {
   res.redirect('/login')
 })
 router.get('/student-register', verifyLogin, (req, res) => {
-  res.render('studentDetails', {title:"Student Register", student: true, login: true })
+  res.render('studentDetails', { title: "Student Register", student: true, login: true })
 })
 router.post('/student-register', verifyLogin, (req, res) => {
   const uploadDir = path.join(__dirname, '..', 'upload');
@@ -95,7 +95,7 @@ router.post('/student-register', verifyLogin, (req, res) => {
 })
 
 router.get('/profile', verifyLogin, (req, res) => {
-  res.render('profile',{student:req.session.student[0],title:"Profile",login:true})
+  res.render('profile', { student: req.session.student[0], title: "Profile", login: true })
 })
 
 module.exports = router;

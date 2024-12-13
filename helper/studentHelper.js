@@ -43,8 +43,8 @@ module.exports = {
     },
     SetStudentRegister: (email, sslc, plustwo) => {
         return new Promise((resolve, reject) => {
-            db.query('insert into students values(?,?,?)', [email, sslc, plustwo], (err, data) => {
-                console.log(err, data)
+            db.query('insert into students(email,sslc_cer_no,plustwo_cer_no) values(?,?,?)', [email, sslc, plustwo], (err, data) => {
+                // console.log(err, data)
                 resolve()
             })
         })
@@ -60,13 +60,17 @@ module.exports = {
             })
         })
     },
-    getStudentDetails: () => {
+    getStudentDetails: (email) => {
         return new Promise((resolve, reject) => {
-            const sql = `SELECT login_data.aadhar, students.register_number
-                         FROM login
-                         INNER JOIN students ON login.email_id = students.email_id;`;
-            db.query('select * from students ', (err, data) => {
+            // console.log(email);
 
+            const sql = `SELECT login_data.aadhar, students.reg_no, login_data.name,login_data.course
+                         FROM login_data
+                         INNER JOIN students ON login_data.email = students.email
+                         where login_data.email=?;`;
+            db.query(sql, email, (err, data) => {
+                console.log(data);
+                resolve(data[0])
             })
         })
     }
