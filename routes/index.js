@@ -56,7 +56,13 @@ router.get('/student', verifyLogin, (req, res) => {
   })
 })
 router.post('/register-exam', (req, res) => {
-  console.log(req.body);
+  studentHelper.registerExam(req.body).then((resp) => {
+    if(resp.status){
+      res.redirect('/student')
+    }else{
+      res.render('regErr')
+    }
+  })
 })
 router.get('/logout', (req, res) => {
   req.session.loggedIn = null

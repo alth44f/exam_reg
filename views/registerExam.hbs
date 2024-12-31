@@ -7,21 +7,36 @@
                 </div>
                 <div class="col-lg-6 p-2">
                     <label for="name">Name</label>
-                    <input type="text" name="name" value="{{student.name}}" id="name" placeholder="Enter Your Name" class="form-control">
+                    <input type="text" value="{{student.email}}" name="email" hidden>
+                    <input type="text" value="{{student.name}}" id="name" placeholder="Enter Your Name"
+                        class="form-control">
                 </div>
                 <div class="col-lg-6 p-2">
                     <label for="aadhar">Aadhar number</label>
-                    <input type="number" name="aadhar" value="{{student.aadhar}}" id="aadhar" placeholder="Enter Aadhar Number" class="form-control">
+                    <input type="number" value="{{student.aadhar}}" id="aadhar" placeholder="Enter Aadhar Number"
+                        class="form-control">
                 </div>
                 <div class="col-lg-6 p-2">
                     <label for="reg_no">Register number</label>
-                    <input type="text" name="reg_no" value="SA{{student.reg_no}}{{student.course}}" id="reg_no" placeholder="Enter Register Number"
-                        class="form-control">
+                    <input type="text" value="SA{{student.reg_no}}{{student.course}}" id="reg_no"
+                        placeholder="Enter Register Number" class="form-control">
                 </div>
                 <div class="col-lg-6 p-2">
                     <label for="second_lang">Second Language</label>
                     <input type="text" name="second_lang" id="second_lang" placeholder="Enter Second Language"
                         class="form-control">
+                </div>
+                <div class="col-lg-6 p-2">
+                    <label for="second_lang">Semester</label>
+                    <select class="form-select" name="sem" id="course" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option value="1">1st Sem</option>
+                        <option value="2">2nd Sem</option>
+                        <option value="3">3rd Sem</option>
+                        <option value="4">4th Sem</option>
+                        <option value="5">5th Sem</option>
+                        <option value="6">6th Sem</option>
+                    </select>
                 </div>
                 <div class="col-lg-12 p-3">
                     <h2>Fill paper</h2>
@@ -37,15 +52,86 @@
                             <input type="text" name="papername1" id="papername" class="form-control">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-6 p-2">
+                            <label for="papercode">Paper code</label>
+                            <input type="text" name="papercode2" id="papercode" class="form-control">
+                        </div>
+                        <div class="col-lg-6 p-2">
+                            <label for="papername">Paper name</label>
+                            <input type="text" name="papername2" id="papername" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 p-2">
+                            <label for="papercode">Paper code</label>
+                            <input type="text" name="papercode3" id="papercode" class="form-control">
+                        </div>
+                        <div class="col-lg-6 p-2">
+                            <label for="papername">Paper name</label>
+                            <input type="text" name="papername3" id="papername" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 p-2">
+                            <label for="papercode">Paper code</label>
+                            <input type="text" name="papercode4" id="papercode" class="form-control">
+                        </div>
+                        <div class="col-lg-6 p-2">
+                            <label for="papername">Paper name</label>
+                            <input type="text" name="papername4" id="papername" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 p-2">
+                            <label for="papercode">Paper code</label>
+                            <input type="text" name="papercode5" id="papercode" class="form-control">
+                        </div>
+                        <div class="col-lg-6 p-2">
+                            <label for="papername">Paper name</label>
+                            <input type="text" name="papername5" id="papername" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 p-2">
+                            <label for="papercode">Paper code</label>
+                            <input type="text" name="papercode6" id="papercode" class="form-control">
+                        </div>
+                        <div class="col-lg-6 p-2">
+                            <label for="papername">Paper name</label>
+                            <input type="text" name="papername6" id="papername" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 p-2">
+                            <label for="papercode">Paper code</label>
+                            <input type="text" name="papercode7" id="papercode" class="form-control">
+                        </div>
+                        <div class="col-lg-6 p-2">
+                            <label for="papername">Paper name</label>
+                            <input type="text" name="papername7" id="papername" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 p-2">
+                            <label for="papercode">Paper code</label>
+                            <input type="text" name="papercode8" id="papercode" class="form-control">
+                        </div>
+                        <div class="col-lg-6 p-2">
+                            <label for="papername">Paper name</label>
+                            <input type="text" name="papername8" id="papername" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-12 p-2 text-center">
-                    <button id="add-paper-btn" type="button" class="btn btn-primary">Add Paper</button>
+                    {{!-- <button id="add-paper-btn" type="button" class="btn btn-primary">Add Paper</button> --}}
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </form>
         </div>
     </form>
 </div>
+{{!--
 <script>
     // Select the button and the paper container
     const addPaperBtn = document.getElementById('add-paper-btn');
@@ -81,4 +167,4 @@
 
     // Add event listener to trigger the function when the button is clicked
     addPaperBtn.addEventListener('click', addPaperFields);
-</script>
+</script> --}}

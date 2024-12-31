@@ -45,5 +45,13 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    getDashboardData:()=>{
+        return new Promise((resolve, reject) => {
+            db.query("SELECT COUNT(*) AS total_students,COUNT(DISTINCT course) AS total_departments FROM login_data WHERE type = 'student'",(err,data)=>{
+                console.log(data);
+                resolve(data[0])
+            })
+        })
     }
 }
