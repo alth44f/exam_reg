@@ -60,10 +60,10 @@ router.post('/add-attandance/', verifyLogin, async (req, res) => {
 router.get('/exam-details', verifyLogin, async (req, res) => {
   // let data = await hodHelper.getExamDetails()
   // console.log(data);
-  res.render('hod/examDetails')
+  res.render('hod/searchStudent', { hod: { name: 'Hod' } })
 })
 
-router.get('/exam-details', verifyLogin, async (req, res) => {
+router.post('/search-student', async (req, res) => {
   let data = await hodHelper.searchStudent(req.body)
   console.log(data);
 })

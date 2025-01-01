@@ -70,7 +70,6 @@ module.exports = {
                          where login_data.email=?;`;
             db.query(sql, email, (err, data) => {
                 data[0].email = email;
-                console.log(data);
                 resolve(data[0])
             })
         })
@@ -78,15 +77,14 @@ module.exports = {
     registerExam: (data) => {
         return new Promise((resolve, reject) => {
             db.query('select * from exam where email=? and sem = ?', [data.email, data.sem], (err, resp) => {
-                console.log(resp);
-                
+                // console.log(resp,data.reg_no);
+
                 if (resp.length > 0) {
-                    resolve({ status: true})
-                    
+                    resolve({ status: true })
                 } else {
-                    const query = 'INSERT INTO exam (email, second_lang, sem, papercode1, papername1, papercode2, papername2, papercode3, papername3, papercode4, papername4, papercode5, papername5, papercode6, papername6, papercode7, papername7, papercode8, papername8) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?)';
-                    
-                    db.query(query, [data.email, data.second_lang, data.sem, data.papercode1, data.papername1, data.papercode2, data.papername2, data.papercode3, data.papername3, data.papercode4, data.papername4, data.papercode5, data.papername5, data.papercode6, data.papername6, data.papercode7, data.papername7, data.papercode8, data.papername8], (err, data) => {
+                    const query = 'INSERT INTO exam (email,reg_no, second_lang, sem, papercode1, papername1, papercode2, papername2, papercode3, papername3, papercode4, papername4, papercode5, papername5, papercode6, papername6, papercode7, papername7, papercode8, papername8) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+
+                    db.query(query, [data.email, data.reg_no, data.second_lang, data.sem, data.papercode1, data.papername1, data.papercode2, data.papername2, data.papercode3, data.papername3, data.papercode4, data.papername4, data.papercode5, data.papername5, data.papercode6, data.papername6, data.papercode7, data.papername7, data.papercode8, data.papername8], (err, data) => {
                         resolve({ status: false })
                     })
                 }

@@ -66,7 +66,14 @@ module.exports = {
     // },
     searchStudent: (student_data) => {
         return new Promise((resolve, reject) => {
-
+            console.log(student_data);
+            const sql = `SELECT login_data.aadhar, exam.email, login_data.name,login_data.course
+                         FROM login_data
+                         INNER JOIN exam ON login_data.email = exam.email
+                         where exam.reg_no=? and exam.sem=?`;
+            db.query(sql, [student_data.reg_no,student_data.sem], (err, data) => {
+                console.log(data);
+            })
         })
     }
 }

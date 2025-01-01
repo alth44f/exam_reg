@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <h2 class="text-center mb-3 mt-4">Select Student</h2>
+        <div class="col-lg-6">
+            <label for="reg_no" class="form-label">Register No</label>
+            <input type="text" class="form-control" name="reg_no" id="reg_no">
+        </div>
+        <div class="col-lg-6">
+            <label for="sem" class="form-label">Semester</label>
+            <select class="form-select" name="sem" id="sem" required>
+                <option selected disabled value="">Choose...</option>
+                <option value="1">1st Sem</option>
+                <option value="2">2nd Sem</option>
+                <option value="3">3rd Sem</option>
+                <option value="4">4th Sem</option>
+                <option value="5">5th Sem</option>
+                <option value="6">6th Sem</option>
+            </select>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="text-center mt-4">
+                <button class="btn btn-success" onclick="search()">Find</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    function search() {
+        let reg_no = document.getElementById('reg_no').value
+        let sem = document.getElementById('sem').value
+        {{!-- alert(sem) --}}
+        $.ajax({
+            url: '/hod/search-student',
+            method: 'post',
+            data: {
+                reg_no,
+                sem
+            }
+        })
+    }
+</script>
