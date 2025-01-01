@@ -47,7 +47,8 @@ router.post('/signup', function (req, res) {
 });
 router.get('/register-exam', verifyLogin, async (req, res) => {
   let student = await studentHelper.getStudentDetails(req.session.student[0].email)
-  res.render('registerExam', { student, title: "Register exam", login: true })
+  // req.session.regExamErr = false
+  res.render('registerExam', { student, err: req.session.regExamErr, title: "Register exam", login: true })
 })
 router.get('/student', verifyLogin, (req, res) => {
   // console.log(req.session)
@@ -57,10 +58,12 @@ router.get('/student', verifyLogin, (req, res) => {
 })
 router.post('/register-exam', (req, res) => {
   studentHelper.registerExam(req.body).then((resp) => {
-    if(resp.status){
+    if (resp.status) {
+      req.session.regExamErr = true
+      res.redirect('/register-exam')
+    } else {
+      req.session.regExamErr = false
       res.redirect('/student')
-    }else{
-      res.render('regErr')
     }
   })
 })

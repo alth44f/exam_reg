@@ -41,17 +41,32 @@ module.exports = {
     },
     addAttandance: (data) => {
         return new Promise((resolve, reject) => {
-            db.query('update login_data set attandance=? where email =?', [data.attandance,data.email], (err, data) => {
+            db.query('update login_data set attandance=? where email =?', [data.attandance, data.email], (err, data) => {
                 resolve()
             })
         })
     },
-    getDashboardData:()=>{
+    getDashboardData: () => {
         return new Promise((resolve, reject) => {
-            db.query("SELECT COUNT(*) AS total_students,COUNT(DISTINCT course) AS total_departments FROM login_data WHERE type = 'student'",(err,data)=>{
-                console.log(data);
+            db.query("SELECT COUNT(*) AS total_students,COUNT(DISTINCT course) AS total_departments FROM login_data WHERE type = 'student'", (err, data) => {
+                // console.log(data);
                 resolve(data[0])
             })
+        })
+    },
+    // getExamDetails: () => {
+    //     return new Promise((resolve, reject) => {
+    //         const sql = `SELECT login_data.name, exam.email,login_data.course,exam.sem
+    //                      FROM login_data
+    //                      INNER JOIN exam ON login_data.email = exam.email;`;
+    //         db.query(sql,(err,data)=>{
+    //             resolve()
+    //         })
+    //     })
+    // },
+    searchStudent: (student_data) => {
+        return new Promise((resolve, reject) => {
+
         })
     }
 }

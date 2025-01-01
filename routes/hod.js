@@ -57,4 +57,15 @@ router.post('/add-attandance/', verifyLogin, async (req, res) => {
   console.log(req.body)
 })
 
+router.get('/exam-details', verifyLogin, async (req, res) => {
+  // let data = await hodHelper.getExamDetails()
+  // console.log(data);
+  res.render('hod/examDetails')
+})
+
+router.get('/exam-details', verifyLogin, async (req, res) => {
+  let data = await hodHelper.searchStudent(req.body)
+  console.log(data);
+})
+
 module.exports = router;
