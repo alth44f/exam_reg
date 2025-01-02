@@ -5,7 +5,7 @@
                 <div class="col-lg-12 p-3">
                     <h2>Basic details</h2>
                     {{#if err}}
-                        <h3 class="text-center text-warning fw-bold">Already Registered.</h3>
+                    <h3 class="text-center text-warning fw-bold">Already Registered.</h3>
                     {{/if}}
                 </div>
                 <div class="col-lg-6 p-2">
@@ -22,7 +22,7 @@
                 <div class="col-lg-6 p-2">
                     <label for="reg_no">Register number</label>
                     <input type="text" value="SA{{student.reg_no}}{{student.course}}" id="reg_no"
-                        placeholder="Enter Register Number" name="reg_no" class="form-control">
+                        placeholder="Enter Register Number" name="reg_no" class="form-control" readonly>
                 </div>
                 <div class="col-lg-6 p-2">
                     <label for="second_lang">Second Language</label>
@@ -30,6 +30,8 @@
                         class="form-control">
                 </div>
                 <div class="col-lg-6 p-2">
+                    <p class="text-danger text-center">Warning: Please make sure you have selected the correct semester
+                        before proceeding.</p>
                     <label for="second_lang">Semester</label>
                     <select class="form-select" name="sem" id="course" required>
                         <option selected disabled value="">Choose...</option>
