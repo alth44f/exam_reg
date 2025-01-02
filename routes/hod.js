@@ -65,7 +65,7 @@ router.get('/exam-details', verifyLogin, async (req, res) => {
 
 router.post('/search-student', async (req, res) => {
   let data = await hodHelper.searchStudent(req.body)
-  console.log(data);
+  res.json(data)
 })
 
 module.exports = router;
