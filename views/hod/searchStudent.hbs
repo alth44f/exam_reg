@@ -127,8 +127,8 @@
                 data.forEach((row) => {
                     const papers = [];
                     for (let i = 1; i <= 8; i++) {
-                        if (row[`papercode${i}`] && row[`papername${i}`]) {
-                            papers.push(`${row[`papercode${i}`]} - ${row[`papername${i}`]}`);
+                        if (row[`paper${i}`]) {
+                            papers.push(`${row[`paper${i}`]}`);
                         }
                     }
 
@@ -136,7 +136,8 @@
                         <div class="col-lg-12 mt-4 mb-3">
                             <div class="card card-custom">
                                 <div class="card-body">
-                                    <h5 class="card-title">${row.name} (${row.aadhar})</h5>
+                                    <h5 class="card-title">${row.name}</h5>
+                                    <h6 class="card-subtitle mb-2">Aadhar: ${row.aadhar}</h6>
                                     <h6 class="card-subtitle mb-2">Gender: ${row.gender}</h6>
                                     <h6 class="card-subtitle mb-2">Attandance: ${row.attandance}%</h6>
                                     <h6 class="card-subtitle mb-2">Second Language: ${row.second_lang}</h6>

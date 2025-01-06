@@ -66,13 +66,21 @@ module.exports = {
     // },
     searchStudent: (student_data) => {
         return new Promise((resolve, reject) => {
-            console.log(student_data);
-            const sql = `SELECT login_data.aadhar,login_data.gender,login_data.attandance, login_data.name,exam.second_lang,exam.papercode1,exam.papername1,exam.papercode2,exam.papername2,exam.papercode3,exam.papername3,exam.papercode4,exam.papername4,exam.papercode5,exam.papername5,exam.papercode6,exam.papername6,exam.papercode7,exam.papername7,exam.papercode8,exam.papername8
+            // console.log(student_data);
+            const sql = `SELECT login_data.aadhar,login_data.gender,login_data.attandance, login_data.name,exam.second_lang,exam.paper1,exam.paper2,exam.paper3,exam.paper4,exam.paper5,exam.paper6,exam.paper7,exam.paper8
                          FROM login_data
                          INNER JOIN exam ON login_data.email = exam.email
                          where exam.reg_no=? and exam.sem=?`;
             db.query(sql, [student_data.reg_no, student_data.sem], (err, data) => {
                 resolve(data)
+            })
+        })
+    },
+    addPaper: (data) => {
+        return new Promise((resolve, reject) => {
+            const sql = 'insert into paper(papername,papercode) values(?,?)';
+            db.query(sql, [data.papername, data.papercode], (err, data) => {
+                resolve()
             })
         })
     }

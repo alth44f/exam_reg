@@ -47,12 +47,12 @@ router.post('/signup', function (req, res) {
 });
 router.get('/register-exam', verifyLogin, async (req, res) => {
   let student = await studentHelper.getStudentDetails(req.session.student[0].email)
-  // req.session.regExamErr = false
-  res.render('registerExam', { student, err: req.session.regExamErr, title: "Register exam", login: true })
+  let papers = await studentHelper.getAllPaper();
+  res.render('registerExam', { student, err: req.session.regExamErr, papers, title: "Register exam", login: true })
 })
 router.get('/student', verifyLogin, (req, res) => {
-  // console.log(req.session)
-  studentHelper.checkUpload(req.session.student[0].email).then((resp) => {
+  // console.log(papers)
+  studentHelper.checkUpload(req.session.student[0].email).then(async (resp) => {
     res.render('userDashboard', { title: "Student Dashboard", student: req.session.student[0], login: true, status: resp.status })
   })
 })

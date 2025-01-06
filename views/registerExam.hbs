@@ -12,12 +12,12 @@
                     <label for="name">Name</label>
                     <input type="text" value="{{student.email}}" name="email" hidden>
                     <input type="text" value="{{student.name}}" id="name" placeholder="Enter Your Name"
-                        class="form-control">
+                        class="form-control" readonly>
                 </div>
                 <div class="col-lg-6 p-2">
                     <label for="aadhar">Aadhar number</label>
                     <input type="number" value="{{student.aadhar}}" id="aadhar" placeholder="Enter Aadhar Number"
-                        class="form-control">
+                        class="form-control" readonly>
                 </div>
                 <div class="col-lg-6 p-2">
                     <label for="reg_no">Register number</label>
@@ -48,83 +48,83 @@
                 </div>
                 <div class="paper">
                     <div class="row">
-                        <div class="col-lg-6 p-2">
-                            <label for="papercode">Paper code</label>
-                            <input type="text" name="papercode1" id="papercode" class="form-control">
+                        <div class="col-lg-12 p-2">
+                            <label for="papercode">Paper</label>
+                            <select class="form-select" name="paper1" id="papercode" required>
+                                <option selected value="">Choose...</option>
+                                {{#each papers}}
+                                <option value="{{papercode}}-{{papername}}">{{papercode}}-{{papername}}</option>
+                                {{/each}}
+                            </select>
                         </div>
-                        <div class="col-lg-6 p-2">
-                            <label for="papername">Paper name</label>
-                            <input type="text" name="papername1" id="papername" class="form-control">
+                        <div class="col-lg-12 p-2">
+                            <label for="papercode">Paper code</label>
+                            <select class="form-select" name="paper2" id="papercode" required>
+                                <option selected value="">Choose...</option>
+                                {{#each papers}}
+                                <option value="{{papercode}}-{{papername}}">{{papercode}}-{{papername}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 p-2">
+                        <div class="col-lg-12 p-2">
                             <label for="papercode">Paper code</label>
-                            <input type="text" name="papercode2" id="papercode" class="form-control">
+                            <select class="form-select" name="paper3" id="papercode" required>
+                                <option selected value="">Choose...</option>
+                                {{#each papers}}
+                                <option value="{{papercode}}-{{papername}}">{{papercode}}-{{papername}}</option>
+                                {{/each}}
+                            </select>
                         </div>
-                        <div class="col-lg-6 p-2">
-                            <label for="papername">Paper name</label>
-                            <input type="text" name="papername2" id="papername" class="form-control">
+                        <div class="col-lg-12 p-2">
+                            <label for="papercode">Paper code</label>
+                            <select class="form-select" name="paper4" id="papercode" required>
+                                <option selected value="">Choose...</option>
+                                {{#each papers}}
+                                <option value="{{papercode}}-{{papername}}">{{papercode}}-{{papername}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 p-2">
+                        <div class="col-lg-12 p-2">
                             <label for="papercode">Paper code</label>
-                            <input type="text" name="papercode3" id="papercode" class="form-control">
+                            <select class="form-select" name="paper5" id="papercode">
+                                <option selected value="">Choose...</option>
+                                {{#each papers}}
+                                <option value="{{papercode}}-{{papername}}">{{papercode}}-{{papername}}</option>
+                                {{/each}}
+                            </select>
                         </div>
-                        <div class="col-lg-6 p-2">
-                            <label for="papername">Paper name</label>
-                            <input type="text" name="papername3" id="papername" class="form-control">
+                        <div class="col-lg-12 p-2">
+                            <label for="papercode">Paper code</label>
+                            <select class="form-select" name="paper6" id="papercode">
+                                <option selected value="">Choose...</option>
+                                {{#each papers}}
+                                <option value="{{papercode}}-{{papername}}">{{papercode}}-{{papername}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 p-2">
+                        <div class="col-lg-12 p-2">
                             <label for="papercode">Paper code</label>
-                            <input type="text" name="papercode4" id="papercode" class="form-control">
+                            <select class="form-select" name="paper7" id="papercode">
+                                <option selected value="">Choose...</option>
+                                {{#each papers}}
+                                <option value="{{papercode}}-{{papername}}">{{papercode}}-{{papername}}</option>
+                                {{/each}}
+                            </select>
                         </div>
-                        <div class="col-lg-6 p-2">
-                            <label for="papername">Paper name</label>
-                            <input type="text" name="papername4" id="papername" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 p-2">
+                        <div class="col-lg-12 p-2">
                             <label for="papercode">Paper code</label>
-                            <input type="text" name="papercode5" id="papercode" class="form-control">
-                        </div>
-                        <div class="col-lg-6 p-2">
-                            <label for="papername">Paper name</label>
-                            <input type="text" name="papername5" id="papername" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 p-2">
-                            <label for="papercode">Paper code</label>
-                            <input type="text" name="papercode6" id="papercode" class="form-control">
-                        </div>
-                        <div class="col-lg-6 p-2">
-                            <label for="papername">Paper name</label>
-                            <input type="text" name="papername6" id="papername" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 p-2">
-                            <label for="papercode">Paper code</label>
-                            <input type="text" name="papercode7" id="papercode" class="form-control">
-                        </div>
-                        <div class="col-lg-6 p-2">
-                            <label for="papername">Paper name</label>
-                            <input type="text" name="papername7" id="papername" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 p-2">
-                            <label for="papercode">Paper code</label>
-                            <input type="text" name="papercode8" id="papercode" class="form-control">
-                        </div>
-                        <div class="col-lg-6 p-2">
-                            <label for="papername">Paper name</label>
-                            <input type="text" name="papername8" id="papername" class="form-control">
+                            <select class="form-select" name="paper8" id="papercode">
+                                <option selected value="">Choose...</option>
+                                {{#each papers}}
+                                <option value="{{papercode}}-{{papername}}">{{papercode}}-{{papername}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
 
         // Add the paper code and paper name input fields to the new row
         paperRow.innerHTML = `
-            <div class="col-lg-6 p-2">
+            <div class="col-lg-12 p-2">
                 <label for="papercode-${paperCodeCount}">Paper code</label>
                 <input type="text" name="papercode${paperCodeCount}" id="papercode-${paperCodeCount}" class="form-control papercode-${paperCodeCount}">
             </div>

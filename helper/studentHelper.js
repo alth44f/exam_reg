@@ -76,18 +76,30 @@ module.exports = {
     },
     registerExam: (data) => {
         return new Promise((resolve, reject) => {
+            console.log(data);
+            
             db.query('select * from exam where email=? and sem = ?', [data.email, data.sem], (err, resp) => {
                 // console.log(resp,data.reg_no);
 
                 if (resp.length > 0) {
                     resolve({ status: true })
                 } else {
-                    const query = 'INSERT INTO exam (email,reg_no, second_lang, sem, papercode1, papername1, papercode2, papername2, papercode3, papername3, papercode4, papername4, papercode5, papername5, papercode6, papername6, papercode7, papername7, papercode8, papername8) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+                    const query = 'INSERT INTO exam (email,reg_no, second_lang, sem,paper1,paper2,paper3,paper4,paper5,paper6,paper7,paper8) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?,?)';
 
-                    db.query(query, [data.email, data.reg_no, data.second_lang, data.sem, data.papercode1, data.papername1, data.papercode2, data.papername2, data.papercode3, data.papername3, data.papercode4, data.papername4, data.papercode5, data.papername5, data.papercode6, data.papername6, data.papercode7, data.papername7, data.papercode8, data.papername8], (err, data) => {
+                    db.query(query, [data.email, data.reg_no, data.second_lang, data.sem, data.paper1, data.paper2, data.paper3, data.paper4, data.paper5, data.paper6, data.paper7, data.paper8], (err, data) => {
                         resolve({ status: false })
                     })
                 }
+            })
+        })
+    },
+    getAllPaper: () => {
+        return new Promise((resolve, reject) => {
+            const sql = 'select * from paper'
+            db.query(sql, (err, data) => {
+                // console.log(data);
+
+                resolve(data)
             })
         })
     }

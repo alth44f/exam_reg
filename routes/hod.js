@@ -67,5 +67,14 @@ router.post('/search-student', async (req, res) => {
   let data = await hodHelper.searchStudent(req.body)
   res.json(data)
 })
+router.get('/add-paper',verifyLogin,(req,res)=>{
+  res.render('hod/addPaper',{hod: {name: 'Hod'}})
+})
+
+router.post('/add-paper',(req,res)=>{
+  hodHelper.addPaper(req.body).then(()=>{
+    res.redirect('/hod')
+  })
+})
 
 module.exports = router;
