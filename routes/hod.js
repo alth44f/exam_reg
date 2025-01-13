@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const hodHelper = require('../helper/hodHelper');
+const path = require('path');
 
 const verifyLogin = (req, res, next) => {
   if (req.session.hodLoggedIn) {
@@ -67,20 +68,46 @@ router.post('/search-student', async (req, res) => {
   let data = await hodHelper.searchStudent(req.body)
   res.json(data)
 })
-router.get('/add-paper',verifyLogin,(req,res)=>{
-  res.render('hod/addPaper',{hod: {name: 'Hod'}})
+router.get('/add-paper', verifyLogin, (req, res) => {
+  res.render('hod/addPaper', { hod: { name: 'Hod' } })
 })
 
-router.post('/add-paper',(req,res)=>{
-  hodHelper.addPaper(req.body).then(()=>{
+router.post('/add-paper', (req, res) => {
+  hodHelper.addPaper(req.body).then(() => {
     res.redirect('/hod')
   })
+})
+
+router.get('/view-documents/:email', (req, res) => {
+  res.render('hod/documents', { email: req.params.email, hod: { name: 'Hod' } })
 })
 
 router.get('/logout', (req, res) => {
   req.session.hodLoggedIn = null
   req.session.hod = null
   res.redirect('/hod/login')
+})
+
+router.get('/birth-certificate/:email', verifyLogin, (req, res) => {
+  const filename = req.params.email + '-birthcer.pdf';
+  const filePath = path.join(__dirname, '../upload', filename);
+  res.download(filePath,(err)=>{
+    if(err){
+      
+    }
+  })
+})
+
+router.get('/plustwo-certificate/:email', verifyLogin, (req, res) => {
+  const filename = req.params.email + '-plustwo.pdf';
+  const filePath = path.join(__dirname, '../upload', filename);
+  res.download(filePath)
+})
+
+router.get('/sslc-certificate/:email', verifyLogin, (req, res) => {
+  const filename = req.params.email + '-sslc.pdf';
+  const filePath = path.join(__dirname, '../upload', filename);
+  res.download(filePath)
 })
 
 module.exports = router;
