@@ -91,9 +91,9 @@ router.get('/logout', (req, res) => {
 router.get('/birth-certificate/:email', verifyLogin, (req, res) => {
   const filename = req.params.email + '-birthcer.pdf';
   const filePath = path.join(__dirname, '../upload', filename);
-  res.download(filePath,(err)=>{
-    if(err){
-      
+  res.download(filePath, (err) => {
+    if (err) {
+      res.render('hod/error', { hod: { name: 'Hod' } })
     }
   })
 })
@@ -101,13 +101,21 @@ router.get('/birth-certificate/:email', verifyLogin, (req, res) => {
 router.get('/plustwo-certificate/:email', verifyLogin, (req, res) => {
   const filename = req.params.email + '-plustwo.pdf';
   const filePath = path.join(__dirname, '../upload', filename);
-  res.download(filePath)
+  res.download(filePath, (err) => {
+    if (err) {
+      res.render('hod/error', { hod: { name: 'Hod' } })
+    }
+  })
 })
 
 router.get('/sslc-certificate/:email', verifyLogin, (req, res) => {
   const filename = req.params.email + '-sslc.pdf';
   const filePath = path.join(__dirname, '../upload', filename);
-  res.download(filePath)
+  res.download(filePath, (err) => {
+    if (err) {
+      res.render('hod/error', { hod: { name: 'Hod' } })
+    }
+  })
 })
 
 module.exports = router;
