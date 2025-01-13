@@ -77,4 +77,10 @@ router.post('/add-paper',(req,res)=>{
   })
 })
 
+router.get('/logout', (req, res) => {
+  req.session.hodLoggedIn = null
+  req.session.hod = null
+  res.redirect('/hod/login')
+})
+
 module.exports = router;
