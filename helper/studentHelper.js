@@ -1,4 +1,10 @@
 let db = require('../connection/connection')
+const Razorpay = require('razorpay')
+const crypto = require("crypto");
+var instance = new Razorpay({
+    key_id: 'rzp_test_AUJDHrGiSHGnEE',
+    key_secret: '8uZAis7DKR5IzFbPPyp7uG8V',
+});
 
 module.exports = {
     doSignup: (userData) => {
@@ -74,20 +80,24 @@ module.exports = {
             })
         })
     },
-    registerExam: (data) => {
+    RegisterExam: (data) => {
         return new Promise((resolve, reject) => {
             console.log(data);
 
             db.query('select * from exam where email=? and sem = ?', [data.email, data.sem], (err, resp) => {
                 // console.log(resp,data.reg_no);
+                data.payment_status = 'Pending'
 
                 if (resp.length > 0) {
                     resolve({ status: true })
                 } else {
-                    const query = 'INSERT INTO exam (email,reg_no, second_lang, sem,paper1,paper2,paper3,paper4,paper5,paper6,paper7,paper8) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?,?)';
+                    const query = 'INSERT INTO exam (email,reg_no, second_lang, sem,paper1,paper2,paper3,paper4,paper5,paper6,paper7,paper8,payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?,?,?)';
 
-                    db.query(query, [data.email, data.reg_no, data.second_lang, data.sem, data.paper1, data.paper2, data.paper3, data.paper4, data.paper5, data.paper6, data.paper7, data.paper8], (err, data) => {
+                    db.query(query, [data.email, data.reg_no, data.second_lang, data.sem, data.paper1, data.paper2, data.paper3, data.paper4, data.paper5, data.paper6, data.paper7, data.paper8, data.payment_status], (err, data) => {
+                        console.log(err);
+                        
                         resolve({ status: false })
+
                     })
                 }
             })
@@ -103,13 +113,41 @@ module.exports = {
             })
         })
     },
-    // getAttandace: (email) => {
-    //     return new Promise((resolve, reject) => {
-    //         const sql = 'select * from login_data where email=?'
-    //         db.query(sql, email, (err, data) => {
-    //             console.log(data);
+    generateRaszorpay: () => {
+        return new Promise((resolve, reject) => {
+            var options = {
+                amount: 12000 * 100,  // amount in the smallest currency unit
+                currency: "INR",
+                receipt: "reg_ex"
+            };
+            instance.orders.create(options, function (err, order) {
+                console.log(err);
+                // console.log(order);
+                resolve(order)
+            });
+        })
+    },
+    confirmPayment: (data) => {
+        return new Promise( (resolve, reject) => {
+            // var payment = {
+            //     payment_id: data.payment_id,
+            //     order_id: data.order_id,
+            //     signature: data.signature
+            // }
+            // // console.log(payment);
+            // const hmac = crypto.createHmac('sha256', "eeEiMmvDmlfUqcRaJ98EzgCS");
 
-    //         })
-    //     })
-    // }
+            // hmac.update(payment.order_id + "|" + payment.payment_id);
+            // let generatedSignature = hmac.digest('hex');
+
+            // let isSignatureValid = generatedSignature == payment.signature;
+            // // console.log(isSignatureValid);
+            // if (isSignatureValid) {
+            //     resolve({ status: true })
+            // } else {
+            //     resolve({ status: false })
+            // }
+            resolve({status:true})
+        })
+    }
 }
