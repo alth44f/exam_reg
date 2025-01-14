@@ -64,7 +64,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             // console.log(email);
 
-            const sql = `SELECT login_data.aadhar, students.reg_no, login_data.name,login_data.course
+            const sql = `SELECT login_data.aadhar, students.reg_no, login_data.name,login_data.course,login_data.attandance
                          FROM login_data
                          INNER JOIN students ON login_data.email = students.email
                          where login_data.email=?;`;
@@ -77,7 +77,7 @@ module.exports = {
     registerExam: (data) => {
         return new Promise((resolve, reject) => {
             console.log(data);
-            
+
             db.query('select * from exam where email=? and sem = ?', [data.email, data.sem], (err, resp) => {
                 // console.log(resp,data.reg_no);
 
@@ -102,5 +102,14 @@ module.exports = {
                 resolve(data)
             })
         })
-    }
+    },
+    // getAttandace: (email) => {
+    //     return new Promise((resolve, reject) => {
+    //         const sql = 'select * from login_data where email=?'
+    //         db.query(sql, email, (err, data) => {
+    //             console.log(data);
+
+    //         })
+    //     })
+    // }
 }

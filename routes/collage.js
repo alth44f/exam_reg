@@ -83,4 +83,9 @@ router.get('/logout', (req, res) => {
     res.redirect('/collage/login')
 })
 
+router.get('/condonation',async(req,res)=>{
+    let students=await collageHelper.getCondonationStudents()
+    res.render('collage/condonation',{collage: {name: 'Collage'},title: 'Condonation',students})
+})
+
 module.exports = router;

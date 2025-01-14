@@ -83,5 +83,13 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    getCondonationStudents: () => {
+        return new Promise((resolve, reject) => {
+            const sql = 'select * from login_data where type="student" and attandance < 75';
+            db.query(sql, (err, data) => {
+                resolve(data)
+            })
+        })
     }
 }

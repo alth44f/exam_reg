@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="table mt-5 mb-5">
+            <table id="myTable" class="table table-hover  mt-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Adhar</th>
+                        <th scope="col">Attandance</th>
+                        {{!-- <th scope="col">Options</th> --}}
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each students}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td scope="col">{{course}}</td>
+                        <td scope="col">{{email}}</td>
+                        <td scope="col">{{phone}}</td>
+                        <td scope="col">{{aadhar}}</td>
+                        <td scope="col">{{attandance}}%</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    let table = new DataTable('#myTable');
+</script>
