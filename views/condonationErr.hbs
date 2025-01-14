@@ -2,6 +2,22 @@
     <div class="row mt-5 pt-5 text-center">
         <div class="alert alert-warning" role="alert">
             <h4 class="fw-bold text-warning">⚠️ Warning: You don't have attandance!</h4>
+            <p>
+                You have reached this page because of shortage in attendance,fill in the
+                details and submit for further process!
+            </p>
+            <a href="/uploads/form.pdf" class="btn btn-outline-dark" download>Download</a>
+        </div>
+        <div class="container">
+            <div class="row text-start mt-3 mb-3">
+                <form action="" method="post">
+                    <label for="form">Form</label>
+                    <input type="file" id="form" name="form" required class="form-control mt-2 mb-2">
+                    <label for="mc">Medical Certificate</label>
+                    <input type="file" id="mc" name="medical-certificate" required class="form-control mt-2 mb-2">
+                    <input type="submit" class="btn btn-outline-success" value="Submit">
+                </form>
+            </div>
         </div>
         <a href="/student" class="btn btn-primary">Back</a>
     </div>
