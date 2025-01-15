@@ -80,10 +80,8 @@ module.exports = {
             })
         })
     },
-    RegisterExam: (data) => {
+    checkReg: (data) => {
         return new Promise((resolve, reject) => {
-            console.log(data);
-
             db.query('select * from exam where email=? and sem = ?', [data.email, data.sem], (err, resp) => {
                 // console.log(resp,data.reg_no);
                 data.payment_status = 'Pending'
@@ -91,15 +89,21 @@ module.exports = {
                 if (resp.length > 0) {
                     resolve({ status: true })
                 } else {
-                    const query = 'INSERT INTO exam (email,reg_no, second_lang, sem,paper1,paper2,paper3,paper4,paper5,paper6,paper7,paper8,payment_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?,?,?)';
-
-                    db.query(query, [data.email, data.reg_no, data.second_lang, data.sem, data.paper1, data.paper2, data.paper3, data.paper4, data.paper5, data.paper6, data.paper7, data.paper8, data.payment_status], (err, data) => {
-                        console.log(err);
-                        
-                        resolve({ status: false })
-
-                    })
+                    resolve({ status: false })
                 }
+            })
+        })
+    },
+    RegisterExam: (data, payment_id) => {
+        return new Promise((resolve, reject) => {
+            data.payment_status = 'Pending'
+            const query = 'INSERT INTO exam (email,reg_no, second_lang, sem,paper1,paper2,paper3,paper4,paper5,paper6,paper7,paper8,payment_status,payment_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?,?,?,?)';
+
+            db.query(query, [data.email, data.reg_no, data.second_lang, data.sem, data.paper1, data.paper2, data.paper3, data.paper4, data.paper5, data.paper6, data.paper7, data.paper8, data.payment_status, payment_id], (err, data) => {
+                console.log(err);
+
+                resolve({ status: false })
+
             })
         })
     },
@@ -128,26 +132,33 @@ module.exports = {
         })
     },
     confirmPayment: (data) => {
-        return new Promise( (resolve, reject) => {
-            // var payment = {
-            //     payment_id: data.payment_id,
-            //     order_id: data.order_id,
-            //     signature: data.signature
-            // }
-            // // console.log(payment);
-            // const hmac = crypto.createHmac('sha256', "eeEiMmvDmlfUqcRaJ98EzgCS");
+        return new Promise((resolve, reject) => {
+            var payment = {
+                payment_id: data.payment_id,
+                order_id: data.order_id,
+                signature: data.signature
+            }
+            // console.log(payment);
+            const hmac = crypto.createHmac('sha256', "8uZAis7DKR5IzFbPPyp7uG8V");
 
-            // hmac.update(payment.order_id + "|" + payment.payment_id);
-            // let generatedSignature = hmac.digest('hex');
+            hmac.update(payment.order_id + "|" + payment.payment_id);
+            let generatedSignature = hmac.digest('hex');
 
-            // let isSignatureValid = generatedSignature == payment.signature;
-            // // console.log(isSignatureValid);
-            // if (isSignatureValid) {
-            //     resolve({ status: true })
-            // } else {
-            //     resolve({ status: false })
-            // }
-            resolve({status:true})
+            let isSignatureValid = generatedSignature == payment.signature;
+            console.log(isSignatureValid);
+            if (isSignatureValid) {
+                resolve({ status: true })
+            } else {
+                resolve({ status: false })
+            }
+        })
+    },
+    changeStatus: (order_id) => {
+        return new Promise((resolve, reject) => {
+            const sql = 'update exam set payment_status = ? where payment_id = ?';
+            db.query(sql, ["Paid", order_id], (err, data) => {
+                resolve()
+            })
         })
     }
 }
