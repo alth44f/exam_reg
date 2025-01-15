@@ -121,20 +121,16 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.query('select * from exam_fee where course = ? and sem = ?', [data.course, data.sem], (err, data) => {
                 console.log(data);
-                if (data.length == 0) {
-                    resolve()
-                } else {
-                    var options = {
-                        amount: parseInt(data[0].fee) * 100,  // amount in the smallest currency unit
-                        currency: "INR",
-                        receipt: "reg_ex"
-                    };
-                    instance.orders.create(options, function (err, order) {
-                        console.log(err);
-                        // console.log(order);
-                        resolve(order)
-                    });
-                }
+                var options = {
+                    amount: parseInt(data[0].fee) * 100,  // amount in the smallest currency unit
+                    currency: "INR",
+                    receipt: "reg_ex"
+                };
+                instance.orders.create(options, function (err, order) {
+                    console.log(err);
+                    // console.log(order);
+                    resolve(order)
+                });
             })
 
         })
