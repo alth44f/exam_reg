@@ -83,9 +83,25 @@ router.get('/logout', (req, res) => {
     res.redirect('/collage/login')
 })
 
-router.get('/condonation',async(req,res)=>{
-    let students=await collageHelper.getCondonationStudents()
-    res.render('collage/condonation',{collage: {name: 'Collage'},title: 'Condonation',students})
+router.get('/condonation', async (req, res) => {
+    let students = await collageHelper.getCondonationStudents()
+    res.render('collage/condonation', { collage: { name: 'Collage' }, title: 'Condonation', students })
 })
+
+router.get('/sem-fee', async (req, res) => {
+    let students = await collageHelper.getAllStudents();
+    res.render('collage/semFee', { collage: { name: 'Collage' } ,students})
+})
+
+router.get('/submit-fee/:email',(req,res)=>{
+    console.log(req.params.email)
+    res.render('collage/submitFee',{collage: {name: 'Collage'},email: req.params.email})
+})
+
+router.post('/submit-fee/',(req,res)=>{
+    console.log();
+    
+})
+
 
 module.exports = router;
