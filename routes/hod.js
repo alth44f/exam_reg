@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const hodHelper = require('../helper/hodHelper');
 const path = require('path');
+const { title } = require('process');
 
 const verifyLogin = (req, res, next) => {
   if (req.session.hodLoggedIn) {
@@ -20,7 +21,7 @@ router.get('/', verifyLogin, async (req, res) => {
   res.render('hod/dashboard', { title: 'Hod Admin Dashboard', hod: { name: 'Admin' }, data, details: dashboard_data })
 });
 router.get('/login', (req, res) => {
-  res.render('hod/login', { err: req.session.hodLoginErr })
+  res.render('hod/login', { err: req.session.hodLoginErr,title: 'Hod Login',student:true })
 })
 router.post('/login', (req, res) => {
   hodHelper.doLogin(req.body).then((resp) => {
@@ -61,7 +62,7 @@ router.post('/add-attandance/', verifyLogin, async (req, res) => {
 router.get('/exam-details', verifyLogin, async (req, res) => {
   // let data = await hodHelper.getExamDetails()
   // console.log(data);
-  res.render('hod/searchStudent', { hod: { name: 'Hod' } })
+  res.render('hod/searchStudent', {title:'Exam Details', hod: { name: 'Hod' } })
 })
 
 router.post('/search-student', async (req, res) => {
@@ -69,7 +70,7 @@ router.post('/search-student', async (req, res) => {
   res.json(data)
 })
 router.get('/add-paper', verifyLogin, (req, res) => {
-  res.render('hod/addPaper', { hod: { name: 'Hod' } })
+  res.render('hod/addPaper', {title:'Add Paper', hod: { name: 'Hod' } })
 })
 
 router.post('/add-paper', (req, res) => {
@@ -79,7 +80,7 @@ router.post('/add-paper', (req, res) => {
 })
 
 router.get('/view-documents/:email', (req, res) => {
-  res.render('hod/documents', { email: req.params.email, hod: { name: 'Hod' } })
+  res.render('hod/documents', { title:'Documents',email: req.params.email, hod: { name: 'Hod' } })
 })
 
 router.get('/logout', (req, res) => {
