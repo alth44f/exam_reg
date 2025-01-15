@@ -69,27 +69,29 @@ router.post('/register-exam', (req, res) => {
       res.json({ status: false })
     } else {
       req.session.regExamErr = false
-      studentHelper.generateRaszorpay().then((response) => {
-        studentHelper.RegisterExam(req.body, response.id).then(() => {
-          response = {
-            id: response.id,
-            entity: response.entity,
-            amount: response.amount,
-            amount_paid: response.amount_paid,
-            amount_due: response.amount_due,
-            currency: response.currency,
-            receipt: response.receipt,
-            offer_id: response.offer_id,
-            status: response.status,
-            attempts: response.attempts,
-            notes: response.notes,
-            created_at: response.created_at,
-            mobile: req.session.student[0].phone,
-            name: req.session.student[0].name,
-            email: req.session.student[0].email
-          }
-          res.json(response)
-        })
+      studentHelper.generateRaszorpay(req.body).then((response) => {
+        if (!response) {
+          studentHelper.RegisterExam(req.body, response.id).then(() => {
+            response = {
+              id: response.id,
+              entity: response.entity,
+              amount: response.amount,
+              amount_paid: response.amount_paid,
+              amount_due: response.amount_due,
+              currency: response.currency,
+              receipt: response.receipt,
+              offer_id: response.offer_id,
+              status: response.status,
+              attempts: response.attempts,
+              notes: response.notes,
+              created_at: response.created_at,
+              mobile: req.session.student[0].phone,
+              name: req.session.student[0].name,
+              email: req.session.student[0].email
+            }
+            res.json(response)
+          })
+        }
       })
     }
   })

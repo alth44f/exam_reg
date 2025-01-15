@@ -9,19 +9,15 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th scope="col">Email</th>
-                    <th>Phone</th>
-                    <th scope="col">Options</th>
+                    <th scope="col" class="text-center">Options</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each students}}
+                {{#each courses}}
                 <tr>
-                    <td>{{name}}</td>
-                    <td>{{email}}</td>
-                    <td>{{phone}}</td>
-                    <td>
-                        <a href="/collage/submit-fee/{{email}}" class="btn btn-success">Add Fee</a>
+                    <td>{{course}}</td>
+                    <td class="text-center">
+                        <a href="/collage/submit-fee/{{course}}" class="btn btn-success">Add Fee</a>
                     </td>
                 </tr>
                 {{/each}}

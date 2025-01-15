@@ -91,5 +91,23 @@ module.exports = {
                 resolve(data)
             })
         })
+    },
+    getCourse: () => {
+        return new Promise((resolve, reject) => {
+            const sql = 'select DISTINCT(course) from login_data where type="student"';
+            db.query(sql, (err, data) => {
+                console.log(data);
+                
+                resolve(data)
+            })
+        })
+    },
+    storeFee:(data)=>{
+        return new Promise((resolve, reject) => {
+            const sql = 'insert into exam_fee(fee,course,sem) values(?,?,?)';
+            db.query(sql,[data.fee,data.course,data.sem],(err,data)=>{
+                resolve()
+            })
+        })
     }
 }

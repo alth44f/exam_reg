@@ -88,19 +88,20 @@ router.get('/condonation', async (req, res) => {
     res.render('collage/condonation', { collage: { name: 'Collage' }, title: 'Condonation', students })
 })
 
-router.get('/sem-fee', async (req, res) => {
-    let students = await collageHelper.getAllStudents();
-    res.render('collage/semFee', { collage: { name: 'Collage' } ,students})
+router.get('/exam-fee', async (req, res) => {
+    let courses = await collageHelper.getCourse();
+    res.render('collage/examFee', { collage: { name: 'Collage' } ,courses})
 })
 
-router.get('/submit-fee/:email',(req,res)=>{
-    console.log(req.params.email)
-    res.render('collage/submitFee',{collage: {name: 'Collage'},email: req.params.email})
+router.get('/submit-fee/:course',(req,res)=>{
+    console.log(req.params.course)
+    res.render('collage/submitFee',{collage: {name: 'Collage'},course: req.params.course})
 })
 
 router.post('/submit-fee/',(req,res)=>{
-    console.log();
-    
+    collageHelper.storeFee(req.body).then(()=>{
+        res.redirect('/collage')
+    })
 })
 
 

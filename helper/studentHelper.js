@@ -70,7 +70,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             // console.log(email);
 
-            const sql = `SELECT login_data.aadhar, students.reg_no, login_data.name,login_data.course,login_data.attandance
+            const sql = `SELECT login_data.aadhar, students.reg_no, login_data.name,login_data.course,login_data.attandance,login_data.course
                          FROM login_data
                          INNER JOIN students ON login_data.email = students.email
                          where login_data.email=?;`;
@@ -117,18 +117,26 @@ module.exports = {
             })
         })
     },
-    generateRaszorpay: () => {
+    generateRaszorpay: (data) => {
         return new Promise((resolve, reject) => {
-            var options = {
-                amount: 12000 * 100,  // amount in the smallest currency unit
-                currency: "INR",
-                receipt: "reg_ex"
-            };
-            instance.orders.create(options, function (err, order) {
-                console.log(err);
-                // console.log(order);
-                resolve(order)
-            });
+            db.query('select * from exam_fee where course = ? and sem = ?', [data.course, data.sem], (err, data) => {
+                console.log(data);
+                if (data.length == 0) {
+                    resolve()
+                } else {
+                    var options = {
+                        amount: parseInt(data[0].fee) * 100,  // amount in the smallest currency unit
+                        currency: "INR",
+                        receipt: "reg_ex"
+                    };
+                    instance.orders.create(options, function (err, order) {
+                        console.log(err);
+                        // console.log(order);
+                        resolve(order)
+                    });
+                }
+            })
+
         })
     },
     confirmPayment: (data) => {
