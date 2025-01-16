@@ -94,13 +94,16 @@ module.exports = {
             })
         })
     },
-    RegisterExam: (data, payment_id) => {
+    RegisterExam: (data, payment_id, price) => {
         return new Promise((resolve, reject) => {
             data.payment_status = 'Pending'
-            const query = 'INSERT INTO exam (email,reg_no, second_lang, sem,paper1,paper2,paper3,paper4,paper5,paper6,paper7,paper8,payment_status,payment_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?,?,?,?)';
+            price /= 100
+            // console.log(price);
 
-            db.query(query, [data.email, data.reg_no, data.second_lang, data.sem, data.paper1, data.paper2, data.paper3, data.paper4, data.paper5, data.paper6, data.paper7, data.paper8, data.payment_status, payment_id], (err, data) => {
-                console.log(err);
+            const query = 'INSERT INTO exam (email,reg_no, second_lang, sem,paper1,paper2,paper3,paper4,paper5,paper6,paper7,paper8,payment_status,payment_id,price) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?,?,?,?,?)';
+
+            db.query(query, [data.email, data.reg_no, data.second_lang, data.sem, data.paper1, data.paper2, data.paper3, data.paper4, data.paper5, data.paper6, data.paper7, data.paper8, data.payment_status, payment_id, price], (err, data) => {
+                // console.log(err);
 
                 resolve({ status: false })
 
@@ -120,15 +123,15 @@ module.exports = {
     generateRaszorpay: (data) => {
         return new Promise((resolve, reject) => {
             db.query('select * from exam_fee where course = ? and sem = ?', [data.course, data.sem], (err, data) => {
-                console.log(data);
                 var options = {
                     amount: parseInt(data[0].fee) * 100,  // amount in the smallest currency unit
                     currency: "INR",
                     receipt: "reg_ex"
                 };
                 instance.orders.create(options, function (err, order) {
-                    console.log(err);
+                    // console.log(err);
                     // console.log(order);
+                    // console.log(order,"order");
                     resolve(order)
                 });
             })

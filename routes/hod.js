@@ -14,11 +14,13 @@ const verifyLogin = (req, res, next) => {
 
 router.get('/', verifyLogin, async (req, res) => {
   let dashboard_data = await hodHelper.getDashboardData()
+  let fee = await hodHelper.getFee()
+  
   let data = {
     reg: 122,
     nonreg: 56,
   }
-  res.render('hod/dashboard', { title: 'Hod Admin Dashboard', hod: { name: 'Admin' }, data, details: dashboard_data })
+  res.render('hod/dashboard', { title: 'Hod Admin Dashboard', hod: { name: 'Admin' }, data, details: dashboard_data ,fee: fee.price,examreg: fee.count})
 });
 router.get('/login', (req, res) => {
   res.render('hod/login', { err: req.session.hodLoginErr,title: 'Hod Login',student:true })

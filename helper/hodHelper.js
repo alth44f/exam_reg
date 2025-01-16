@@ -83,5 +83,12 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    getFee:()=>{
+        return new Promise((resolve,reject)=>{
+            db.query('select sum(price) as price,count(*) as count from exam where payment_status = "paid"',(err,data)=>{
+                resolve(data[0])
+            })
+        })
     }
 }

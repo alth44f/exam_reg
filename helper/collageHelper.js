@@ -104,7 +104,7 @@ module.exports = {
     },
     storeFee:(data)=>{
         return new Promise((resolve, reject) => {
-            const sql = 'insert into exam_fee(fee,course,sem) values(?,?,?)';
+            const sql = 'insert into exam_fee(fee,course,sem) values(?,?,?) ON DUPLICATE KEY UPDATE fee = VALUES(fee);';
             db.query(sql,[data.fee,data.course,data.sem],(err,data)=>{
                 resolve()
             })

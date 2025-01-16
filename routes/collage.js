@@ -100,7 +100,7 @@ router.get('/submit-fee/:course',(req,res)=>{
 
 router.post('/submit-fee/',(req,res)=>{
     collageHelper.storeFee(req.body).then(()=>{
-        res.redirect('/collage')
+        res.redirect('/collage/exam-fee')
     })
 })
 

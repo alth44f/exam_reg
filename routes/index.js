@@ -70,7 +70,7 @@ router.post('/register-exam', (req, res) => {
     } else {
       req.session.regExamErr = false
       studentHelper.generateRaszorpay(req.body).then((response) => {
-        studentHelper.RegisterExam(req.body, response.id).then(() => {
+        studentHelper.RegisterExam(req.body, response.id,response.amount).then(() => {
           response = {
             id: response.id,
             entity: response.entity,
