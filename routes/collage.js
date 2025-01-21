@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const collageHelper = require('../helper/collageHelper');
+const hodHelper = require('../helper/hodHelper');
 
 const verifyLogin = (req, res, next) => {
     if (req.session.collageLoggedIn) {
@@ -12,14 +13,12 @@ const verifyLogin = (req, res, next) => {
 
 router.get('/', verifyLogin, async (req, res) => {
     let dashboard_data = await collageHelper.getDashboardData()
-    let data = {
-        reg: 122,
-        nonreg: 56,
-    }
-    res.render('collage/dashboard', { title: 'College Admin Dashboard', collage: { name: 'Collage' }, data, details: dashboard_data })
+    let fee = await hodHelper.getFee()
+    let notreg = parseInt(dashboard_data.total_students) - parseInt(fee.count)
+    res.render('collage/dashboard', { title: 'College Admin Dashboard', notreg, collage: { name: 'Collage' }, details: dashboard_data, fee: fee.price, examreg: fee.count })
 });
 router.get('/login', (req, res) => {
-    res.render('collage/login', {title:'College Login', err: req.session.collageLoginErr,student:true })
+    res.render('collage/login', { title: 'College Login', err: req.session.collageLoginErr, student: true })
 })
 router.post('/login', (req, res) => {
     collageHelper.doLogin(req.body).then((resp) => {
@@ -60,7 +59,7 @@ router.post('/add-attandance/', verifyLogin, async (req, res) => {
 router.get('/exam-details', verifyLogin, async (req, res) => {
     // let data = await collageHelper.getExamDetails()
     // console.log(data);
-    res.render('collage/searchStudent', {title:'Exam Details', collage: { name: 'Collage' } })
+    res.render('collage/searchStudent', { title: 'Exam Details', collage: { name: 'Collage' } })
 })
 
 router.post('/search-student', async (req, res) => {
@@ -90,16 +89,16 @@ router.get('/condonation', async (req, res) => {
 
 router.get('/exam-fee', async (req, res) => {
     let courses = await collageHelper.getCourse();
-    res.render('collage/examFee', {title:'Exam Fee', collage: { name: 'Collage' } ,courses})
+    res.render('collage/examFee', { title: 'Exam Fee', collage: { name: 'Collage' }, courses })
 })
 
-router.get('/submit-fee/:course',(req,res)=>{
+router.get('/submit-fee/:course', (req, res) => {
     console.log(req.params.course)
-    res.render('collage/submitFee',{collage: {name: 'Collage'},course: req.params.course})
+    res.render('collage/submitFee', { collage: { name: 'Collage' }, course: req.params.course })
 })
 
-router.post('/submit-fee/',(req,res)=>{
-    collageHelper.storeFee(req.body).then(()=>{
+router.post('/submit-fee/', (req, res) => {
+    collageHelper.storeFee(req.body).then(() => {
         res.redirect('/collage/exam-fee')
     })
 })
