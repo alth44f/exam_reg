@@ -102,12 +102,23 @@ router.post('/submit-fee/', (req, res) => {
         res.redirect('/collage/exam-fee')
     })
 })
-router.get('/hod-details',async(req,res)=>{
+router.get('/hod-details',verifyLogin,async(req,res)=>{
     let hods = await collageHelper.getHods();
     res.render('collage/hodDetails',{collage: {name: "Collage"},hods})
 })
-router.get('/add-hod',(req,res)=>{
-    res.render('addHod')
+router.get('/add-hod',verifyLogin,(req,res)=>{
+    res.render('collage/addHod',{collage: {name: 'Collage'}})
+})
+router.post('/add-hod',(req,res)=>{
+    collageHelper.addHod(req.body).then(()=>{
+        res.redirect('/collage/hod-details')
+    })
+})
+router.get('/remove-hod/:email',(req,res)=>{
+    console.log(req.params);
+    collageHelper.removeHod(req.params.email).then(()=>{
+        res.redirect('/collage/hod-details')
+    })
 })
 
 module.exports = router;

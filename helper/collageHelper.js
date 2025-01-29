@@ -97,25 +97,41 @@ module.exports = {
             const sql = 'select DISTINCT(course) from login_data where type="student"';
             db.query(sql, (err, data) => {
                 console.log(data);
-                
+
                 resolve(data)
             })
         })
     },
-    storeFee:(data)=>{
+    storeFee: (data) => {
         return new Promise((resolve, reject) => {
             const sql = 'insert into exam_fee(fee,course,sem) values(?,?,?) ON DUPLICATE KEY UPDATE fee = VALUES(fee);';
-            db.query(sql,[data.fee,data.course,data.sem],(err,data)=>{
+            db.query(sql, [data.fee, data.course, data.sem], (err, data) => {
                 resolve()
             })
         })
     },
-    getHods:()=>{
+    getHods: () => {
         return new Promise((resolve, reject) => {
             const sql = 'select name,email from login_data where type="hod"';
-            db.query(sql,(err,data)=>{
-                console.log(data);
+            db.query(sql, (err, data) => {
                 resolve(data)
+            })
+        })
+    },
+    addHod: (data) => {
+        return new Promise((resolve, reject) => {
+            const sql = 'insert into login_data(name,email,type,password) values(?,?,?,?)';
+            db.query(sql, [data.name, data.email, 'hod', data.password], (err, data) => {
+                resolve()
+            })
+        })
+    },
+    removeHod: (email) => {
+        return new Promise((resolve, reject) => {
+            console.log(email);
+            const sql = 'delete from login_data where email = ?';
+            db.query(sql, [email], (err, data) => {
+                resolve()
             })
         })
     }
