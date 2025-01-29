@@ -109,5 +109,14 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    getHods:()=>{
+        return new Promise((resolve, reject) => {
+            const sql = 'select name,email from login_data where type="hod"';
+            db.query(sql,(err,data)=>{
+                console.log(data);
+                resolve(data)
+            })
+        })
     }
 }

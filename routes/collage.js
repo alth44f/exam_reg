@@ -102,6 +102,12 @@ router.post('/submit-fee/', (req, res) => {
         res.redirect('/collage/exam-fee')
     })
 })
-
+router.get('/hod-details',async(req,res)=>{
+    let hods = await collageHelper.getHods();
+    res.render('collage/hodDetails',{collage: {name: "Collage"},hods})
+})
+router.get('/add-hod',(req,res)=>{
+    res.render('addHod')
+})
 
 module.exports = router;
