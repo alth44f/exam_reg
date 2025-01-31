@@ -25,9 +25,9 @@ module.exports = {
             })
         })
     },
-    getAllStudents: () => {
+    getAllStudents: (department) => {
         return new Promise((resolve, reject) => {
-            db.query('select * from login_data where type="student"', (err, data) => {
+            db.query('select * from login_data where type="student" and course=?', [department], (err, data) => {
                 resolve(data)
             })
         })
@@ -84,9 +84,9 @@ module.exports = {
             })
         })
     },
-    getFee:()=>{
-        return new Promise((resolve,reject)=>{
-            db.query('select sum(price) as price,count(*) as count from exam where payment_status = "paid"',(err,data)=>{
+    getFee: () => {
+        return new Promise((resolve, reject) => {
+            db.query('select sum(price) as price,count(*) as count from exam where payment_status = "paid"', (err, data) => {
                 resolve(data[0])
             })
         })

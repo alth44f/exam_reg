@@ -6,6 +6,13 @@
                 <input type="text" class="form-control" id="name" name="name">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email">
+                <label for="department">Department</label>
+                <select class="form-select" name="department" id="papercode">
+                    <option selected value="">Choose...</option>
+                    {{#each departments}}
+                    <option value="{{course}}">{{course}}</option>
+                    {{/each}}
+                </select>
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password">
                 <div class="text-center mt-3">

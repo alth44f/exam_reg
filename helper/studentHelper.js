@@ -10,7 +10,7 @@ module.exports = {
     doSignup: (userData) => {
         return new Promise((resolve, reject) => {
             userData.type = "student"
-            db.query('insert ignore into login_data values(?,?,?,?,?,?,?,?,?,?,?) ', [userData.name, userData.type, userData.course, userData.email, userData.phone, userData.aadhar, userData.gender, userData.dob, userData.password, 0, 0], (err, data) => {
+            db.query('insert ignore into login_data(name,type,course,email,phone,aadhar,gender,dob,password,status,attandance) values(?,?,?,?,?,?,?,?,?,?,?) ', [userData.name, userData.type, userData.course, userData.email, userData.phone, userData.aadhar, userData.gender, userData.dob, userData.password, 0, 0], (err, data) => {
                 if (err) {
                     throw err
                 }

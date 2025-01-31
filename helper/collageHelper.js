@@ -112,7 +112,7 @@ module.exports = {
     },
     getHods: () => {
         return new Promise((resolve, reject) => {
-            const sql = 'select name,email from login_data where type="hod"';
+            const sql = 'select name,email,department from login_data where type="hod"';
             db.query(sql, (err, data) => {
                 resolve(data)
             })
@@ -120,8 +120,8 @@ module.exports = {
     },
     addHod: (data) => {
         return new Promise((resolve, reject) => {
-            const sql = 'insert into login_data(name,email,type,password) values(?,?,?,?)';
-            db.query(sql, [data.name, data.email, 'hod', data.password], (err, data) => {
+            const sql = 'insert into login_data(name,email,department,type,password) values(?,?,?,?,?)';
+            db.query(sql, [data.name, data.email, data.department, 'hod', data.password], (err, data) => {
                 resolve()
             })
         })
@@ -132,6 +132,14 @@ module.exports = {
             const sql = 'delete from login_data where email = ?';
             db.query(sql, [email], (err, data) => {
                 resolve()
+            })
+        })
+    },
+    departments: () => {
+        return new Promise((resolve, reject) => {
+            const sql = 'select DISTINCT course from login_data WHERE course IS NOT NULL AND course <> ""';
+            db.query(sql, (err, data) => {
+                resolve(data)
             })
         })
     }

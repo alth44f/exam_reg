@@ -23,7 +23,8 @@ router.get('/login', (req, res) => {
 })
 router.post('/login', (req, res) => {
   hodHelper.doLogin(req.body).then((resp) => {
-    // console.log(resp)
+    // console.log(resp.hod[0].department)
+    req.session.department = resp.hod[0].department;
     if (resp.err) {
       req.session.hodLoginErr = resp.err
       res.redirect('/hod/login')
@@ -35,7 +36,7 @@ router.post('/login', (req, res) => {
   })
 })
 router.get('/approve-students', verifyLogin, (req, res) => {
-  hodHelper.getAllStudents().then((resp) => {
+  hodHelper.getAllStudents(req.session.department).then((resp) => {
     // console.log(resp);
     res.render('hod/approveStudents', { title: "Student Details", hod: { name: 'Hod' }, students: resp })
   })
