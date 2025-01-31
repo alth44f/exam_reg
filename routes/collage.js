@@ -7,7 +7,7 @@ const verifyLogin = (req, res, next) => {
     if (req.session.collageLoggedIn) {
         next()
     } else {
-        res.redirect('/collage/login')
+        res.redirect('/college/login')
     }
 }
 
@@ -25,11 +25,11 @@ router.post('/login', (req, res) => {
         // console.log(resp)
         if (resp.err) {
             req.session.collageLoginErr = resp.err
-            res.redirect('/collage/login')
+            res.redirect('/college/login')
         } else {
             req.session.collageLoggedIn = true
             req.session.collageLoginErr = null
-            res.redirect('/collage')
+            res.redirect('/college')
         }
     })
 })
@@ -41,7 +41,7 @@ router.get('/approve-students', verifyLogin, (req, res) => {
 })
 router.get('/change-status/:email/:status', verifyLogin, (req, res) => {
     collageHelper.changeStatus(req.params).then(() => {
-        res.redirect('/collage/approve-students')
+        res.redirect('/college/approve-students')
     })
 })
 router.get('/add-attandance/:email', verifyLogin, async (req, res) => {
@@ -51,7 +51,7 @@ router.get('/add-attandance/:email', verifyLogin, async (req, res) => {
 
 router.post('/add-attandance/', verifyLogin, async (req, res) => {
     collageHelper.addAttandance(req.body).then(() => {
-        res.redirect('/collage/approve-students')
+        res.redirect('/college/approve-students')
     })
     console.log(req.body)
 })
@@ -72,14 +72,14 @@ router.get('/add-paper', verifyLogin, (req, res) => {
 
 router.post('/add-paper', (req, res) => {
     collageHelper.addPaper(req.body).then(() => {
-        res.redirect('/collage')
+        res.redirect('/college')
     })
 })
 
 router.get('/logout', (req, res) => {
     req.session.collageLoggedIn = null
     req.session.collage = null
-    res.redirect('/collage/login')
+    res.redirect('/college/login')
 })
 
 router.get('/condonation', async (req, res) => {
@@ -99,7 +99,7 @@ router.get('/submit-fee/:course', (req, res) => {
 
 router.post('/submit-fee/', (req, res) => {
     collageHelper.storeFee(req.body).then(() => {
-        res.redirect('/collage/exam-fee')
+        res.redirect('/college/exam-fee')
     })
 })
 router.get('/hod-details',verifyLogin,async(req,res)=>{
@@ -113,13 +113,13 @@ router.get('/add-hod',verifyLogin,async(req,res)=>{
 })
 router.post('/add-hod',(req,res)=>{
     collageHelper.addHod(req.body).then(()=>{
-        res.redirect('/collage/hod-details')
+        res.redirect('/college/hod-details')
     })
 })
 router.get('/remove-hod/:email',(req,res)=>{
     console.log(req.params);
     collageHelper.removeHod(req.params.email).then(()=>{
-        res.redirect('/collage/hod-details')
+        res.redirect('/college/hod-details')
     })
 })
 

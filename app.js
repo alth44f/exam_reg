@@ -38,7 +38,7 @@ app.use(fileupload())
 
 app.use('/', indexRouter);
 app.use('/hod', hodRouter);
-app.use('/collage', collageRouter);
+app.use('/college', collageRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
