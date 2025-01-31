@@ -15,7 +15,7 @@ router.get('/', verifyLogin, async (req, res) => {
     let dashboard_data = await collageHelper.getDashboardData()
     let fee = await hodHelper.getFee()
     let notreg = parseInt(dashboard_data.total_students) - parseInt(fee.count)
-    res.render('collage/dashboard', { title: 'College Admin Dashboard', notreg, collage: { name: 'Collage' }, details: dashboard_data, fee: fee.price, examreg: fee.count })
+    res.render('collage/dashboard', { title: 'College Admin Dashboard', notreg, collage: { name: 'College' }, details: dashboard_data, fee: fee.price, examreg: fee.count })
 });
 router.get('/login', (req, res) => {
     res.render('collage/login', { title: 'College Login', err: req.session.collageLoginErr, student: true })
