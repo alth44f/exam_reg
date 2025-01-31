@@ -24,11 +24,11 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
   hodHelper.doLogin(req.body).then((resp) => {
     // console.log(resp.hod[0].department)
-    req.session.department = resp.hod[0].department;
     if (resp.err) {
       req.session.hodLoginErr = resp.err
       res.redirect('/hod/login')
     } else {
+      req.session.department = resp.hod[0].department;
       req.session.hodLoggedIn = true
       req.session.hodLoginErr = null
       res.redirect('/hod')
