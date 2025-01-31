@@ -76,10 +76,10 @@ module.exports = {
             })
         })
     },
-    addPaper: (data) => {
+    addPaper: (data,course) => {
         return new Promise((resolve, reject) => {
-            const sql = 'insert into paper(papername,papercode) values(?,?)';
-            db.query(sql, [data.papername, data.papercode], (err, data) => {
+            const sql = 'insert into paper(papername,papercode,sem,course) values(?,?,?,?)';
+            db.query(sql, [data.papername, data.papercode,data.sem,course], (err, data) => {
                 resolve()
             })
         })

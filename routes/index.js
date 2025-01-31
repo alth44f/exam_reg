@@ -49,7 +49,9 @@ router.get('/register-exam', verifyLogin, async (req, res) => {
   let student = await studentHelper.getStudentDetails(req.session.student[0].email)
   console.log(student);
   if (student.attandance >= 75) {
-    let papers = await studentHelper.getAllPaper();
+    let papers = await studentHelper.getAllPaper(student.course);
+    console.log(papers);
+    
     res.render('registerExam', { student, err: req.session.regExamErr, papers, title: "Register exam", login: true })
   } else {
     res.render('condonationErr', { student, login: true })

@@ -73,8 +73,8 @@ router.get('/add-paper', verifyLogin, (req, res) => {
 })
 
 router.post('/add-paper', (req, res) => {
-  hodHelper.addPaper(req.body).then(() => {
-    res.redirect('/hod')
+  hodHelper.addPaper(req.body,req.session.department).then(() => {
+    res.redirect('/hod/add-paper')
   })
 })
 

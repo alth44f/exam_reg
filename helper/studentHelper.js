@@ -110,12 +110,11 @@ module.exports = {
             })
         })
     },
-    getAllPaper: () => {
+    getAllPaper: (course) => {
         return new Promise((resolve, reject) => {
-            const sql = 'select * from paper'
-            db.query(sql, (err, data) => {
+            const sql = 'select * from paper where course =?'
+            db.query(sql, [course], (err, data) => {
                 // console.log(data);
-
                 resolve(data)
             })
         })
