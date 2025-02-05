@@ -104,12 +104,12 @@ router.post('/submit-fee/', (req, res) => {
 })
 router.get('/hod-details',verifyLogin,async(req,res)=>{
     let hods = await collageHelper.getHods();
-    res.render('collage/hodDetails',{collage: {name: "Collage"},hods})
+    res.render('collage/hodDetails',{collage: {name: "Collage"},hods,title:"HOD DETAILS"})
 })
 router.get('/add-hod',verifyLogin,async(req,res)=>{
     let departments= await collageHelper.departments();
     // console.log(departments);
-    res.render('collage/addHod',{collage: {name: 'Collage'},departments})
+    res.render('collage/addHod',{collage: {name: 'Collage'},departments,title:"ADD HOD"})
 })
 router.post('/add-hod',(req,res)=>{
     collageHelper.addHod(req.body).then(()=>{

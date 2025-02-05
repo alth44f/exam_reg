@@ -54,7 +54,7 @@ router.get('/register-exam', verifyLogin, async (req, res) => {
     
     res.render('registerExam', { student, err: req.session.regExamErr, papers, title: "Register exam", login: true })
   } else {
-    res.render('condonationErr', { student, login: true })
+    res.render('condonationErr', { student, login: true,title:'condonation' })
   }
 })
 router.get('/student', verifyLogin, (req, res) => {
